@@ -62,11 +62,11 @@
             color: var(--primary-color);
         }
 
-        /* ==================== ANIMACIONES SCROLL ==================== -->
+                /* ==================== ANIMACIONES SCROLL ==================== */
         .fade-in-up {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(20px);
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .fade-in-up.visible {
@@ -157,10 +157,10 @@
         }
 
         /* Hero Section */
-        .hero {
+                .hero {
             background: linear-gradient(135deg, var(--primary-color) 0%, #1e293b 100%);
             color: var(--white);
-            padding: 8rem 5% 6rem;
+            padding: 10rem 5% 8rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -578,14 +578,17 @@
         @keyframes fadeInChat { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* ==================== RESPONSIVE ==================== */
-        @media (max-width: 992px) {
-            .hero { flex-direction: column; text-align: center; padding-top: 6rem; }
-            .hero-text { max-width: 100%; }
-            .hero h1 { font-size: 2.8rem; }
+                @media (max-width: 992px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 8rem; padding-bottom: 4rem; }
+            .hero-text { max-width: 100%; order: 1; }
+            .hero-image { order: 2; margin-top: 2rem; }
+            .hero h1 { font-size: 2.5rem; }
             .about { flex-direction: column-reverse; text-align: center; }
         }
 
         @media (max-width: 768px) {
+            .section-padding { padding: 4rem 6%; }
+            .section-title { font-size: 2rem; }
             .hamburger { display: block; }
             nav {
                 position: fixed;
@@ -605,10 +608,12 @@
             nav ul { flex-direction: column; gap: 2.5rem; }
             nav a { font-size: 1.5rem; }
             .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
             .contact-buttons { flex-direction: column; align-items: center; }
             .btn-social { width: 100%; max-width: 350px; }
-            .contact-form-container { padding: 1.5rem; }
-            .chat-window { width: calc(100% - 40px); height: 70vh; right: 20px; bottom: 90px; }
+            .contact-form-container { padding: 1.8rem; border-radius: 12px; }
+            .chat-window { width: 90vw; right: 5vw; bottom: 85px; }
+            .card { padding: 2rem 1.5rem; }
         }
     </style>
 </head>
@@ -815,7 +820,7 @@
             <p>Síguenos en Instagram: <a href="https://instagram.com/nnweb_studio" target="_blank">@nnweb_studio</a></p>
         </div>
 
-        <p class="copyright">&copy; 2026 NN Web Studio.</p>
+        <p class="copyright">&copy; <span id="year"></span> NN Web Studio. Todos los derechos reservados.</p>
     </footer>
 
     <!-- ==================== WIDGET CHATBOT ==================== -->
@@ -830,11 +835,11 @@
                 <div class="chat-msg bot">¡Hola! Soy el asistente de NN Web Studio. ¿En qué puedo ayudarte hoy?</div>
             </div>
 
-            <div class="chat-options" id="chatOptions">
+                        <div class="chat-options" id="chatOptions">
+                <button class="chat-option-btn" onclick="handleOptionClick('¿Cuánto cuesta una página web?')">¿Cuánto cuesta una página web?</button>
                 <button class="chat-option-btn" onclick="handleOptionClick('¿Qué servicios ofrecen?')">¿Qué servicios ofrecen?</button>
                 <button class="chat-option-btn" onclick="handleOptionClick('¿Cuánto tarda una página web?')">¿Cuánto tarda una página web?</button>
-                <button class="chat-option-btn" onclick="handleOptionClick('¿Cómo puedo contactarlos?')">¿Cómo puedo contactarlos?</button>
-                <button class="chat-option-btn special" onclick="openWhatsApp()">Contactanos</button>
+                <button class="chat-option-btn special" onclick="openWhatsApp()">Hablar con un experto</button>
             </div>
         </div>
 
@@ -847,13 +852,20 @@
         </button>
     </div>
 
-    <!-- ==================== SCRIPTS ==================== -->
+        <!-- ==================== SCRIPTS ==================== -->
     <script>
-        /* --- 1. RESTAURACIÓN DE SCROLL --- */
+        /* --- 1. SIEMPRE AL INICIO AL CARGAR --- */
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        };
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
-        window.addEventListener('load', () => window.scrollTo(0, 0));
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                window.scrollTo({top: 0, behavior: 'instant'});
+            }, 0);
+        });
 
         /* --- 2. LÓGICA DE NAVEGACIÓN Y HEADER --- */
         const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -956,11 +968,11 @@
         const chatBody = document.getElementById('chatBody');
         const chatOptions = document.getElementById('chatOptions');
 
-        const faqDatabase = {
+                const faqDatabase = {
+            "¿Cuánto cuesta una página web?": "Nuestros sitios web tienen un precio inicial desde $200 MXN. El costo puede variar dependiendo de las funciones que necesite tu negocio. Escríbenos por WhatsApp y te ayudamos a crear la mejor opción para ti.",
             "¿Qué servicios ofrecen?": "Creamos páginas web corporativas, catálogos digitales para tiendas y desarrollamos plataformas web a la medida de tu negocio.",
-            "¿Cuánto tarda una página web?": "El tiempo de entrega depende del tamaño del proyecto, pero la mayoría de las páginas web se completan entre 1 a 2 hábiles.",
-            "¿Cómo puedo contactarlos?": "Puedes escribirnos por WhatsApp, usar el formulario de contacto de la página, o mandarnos un DM en Instagram.",
-            "¿Qué incluye una página web?": "Incluye diseño adaptable a celulares, botón de WhatsApp, optimización SEO básica y publicación de tu sitio en internet."
+            "¿Cuánto tarda una página web?": "El tiempo de entrega depende del tamaño del proyecto, pero la mayoría de las páginas web se completan entre 1 a 3 dias.",
+            "¿Cómo puedo contactarlos?": "Puedes escribirnos por WhatsApp, usar el formulario de contacto de la página, o mandarnos un DM en Instagram."
         };
 
         openChatBtn.addEventListener('click', () => chatWindow.classList.add('active'));
@@ -991,6 +1003,7 @@
             const whatsappUrl = "https://wa.me/526442252598?text=Hola,%20me%20interesa%20una%20p%C3%A1gina%20web%20para%20mi%20negocio";
             window.open(whatsappUrl, '_blank');
         }
+        document.getElementById("year").textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
