@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ==================== SEO Y META ETIQUETAS ==================== -->
+    <title>NN Web Studio | Creamos páginas web para hacer crecer tu negocio</title>
+    <meta name="description" content="NN Web Studio: Desarrollo de páginas web profesionales, catálogos digitales y plataformas a medida para negocios y emprendedores en Sonora. Impulsa tu presencia digital.">
+    <meta name="keywords" content="desarrollo web, páginas web, catálogos digitales, diseño web, negocios, emprendedores, Sonora">
+    
+    <!-- Open Graph (WhatsApp, Facebook, Instagram) -->
+    <meta property="og:title" content="NN Web Studio | Creamos páginas web para hacer crecer tu negocio">
+    <meta property="og:description" content="Atrae más clientes y aumenta tus ventas con un sitio web profesional y diseñado estratégicamente para tu negocio.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.tudominio.com"> <!-- REEMPLAZA ESTO CON LA URL DE TU PÁGINA -->
+    <meta property="og:image" content="https://www.tudominio.com/imagen-preview.jpg"> <!-- REEMPLAZA ESTO CON UNA IMAGEN DE PREVIEW DE TU SITIO -->
+    
+    <!-- Favicon -->
+    <!-- COLOCA TU ARCHIVO FAVICON (por ejemplo, favicon.png o favicon.ico) EN LA MISMA CARPETA QUE ESTE ARCHIVO HTML Y ACTUALIZA EL NOMBRE ABAJO SI ES NECESARIO -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <style>
+        /* Variables de color y tipografía */
+        :root {
+            --primary-color: #0f172a;
+            --accent-color: #3b82f6;
+            --text-color: #333;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --whatsapp-color: #25D366;
+            --instagram-color: #C13584;
+            --chat-bg: #f1f5f9;
+            --bot-msg: #e2e8f0;
+            --user-msg: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navegación */
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .tagline {
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1e293b 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 7rem 5%;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #cbd5e1;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #2563eb;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Secciones Generales (Servicios y Beneficios) */
+        .services {
+            padding: 6rem 5%;
+            text-align: center;
+        }
+
+        .bg-white {
+            background-color: var(--white);
+        }
+
+        .services h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3.5rem;
+            color: var(--primary-color);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background-color: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+
+        .bg-white .card {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 1px solid #f1f5f9;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        /* Sobre Nosotros */
+        .about {
+            padding: 6rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            color: #475569;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer / Contacto */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 5rem 5%;
+        }
+
+        footer h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        footer p.contact-phrase {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn-social {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.2rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            min-width: 280px;
+        }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp-color);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #20BA56;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            box-shadow: 0 4px 15px rgba(193, 53, 132, 0.2);
+        }
+
+        .btn-instagram:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(193, 53, 132, 0.4);
+            filter: brightness(1.1);
+        }
+        
+        .footer-extra-info {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: 3rem;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #64748b;
+            border-top: 1px solid #1e293b;
+            padding-top: 2rem;
+        }
+
+        /* ==================== CHATBOT STYLES ==================== */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .chat-toggle-btn {
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            border: none;
+        }
+
+        .chat-toggle-btn:hover {
+            transform: scale(1.1);
+            background-color: #2563eb;
+        }
+
+        .chat-toggle-btn svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--white);
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            max-height: 80vh;
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: 9999;
+        }
+
+        .chat-window.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: all;
+        }
+
+        .chat-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .chat-close-btn {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .chat-close-btn:hover {
+            color: var(--accent-color);
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 20px;
+            background-color: var(--chat-bg);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chat-msg {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .chat-msg.bot {
+            background-color: var(--bot-msg);
+            color: var(--text-color);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-msg.user {
+            background-color: var(--user-msg);
+            color: var(--white);
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-options {
+            padding: 15px;
+            background-color: var(--white);
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .chat-option-btn {
+            background-color: var(--bg-light);
+            border: 1px solid #cbd5e1;
+            color: var(--text-color);
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .chat-option-btn:hover {
+            background-color: var(--bot-msg);
+            border-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .chat-option-btn.special {
+            background-color: var(--whatsapp-color);
+            color: var(--white);
+            border-color: var(--whatsapp-color);
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .chat-option-btn.special:hover {
+            background-color: #20BA56;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn-social {
+                width: 100%;
+                max-width: 350px;
+            }
+            
+            /* Ajustes del chatbot para móviles */
+            .chat-window {
+                width: calc(100% - 40px); /* Ocupa casi todo el ancho */
+                height: 70vh; /* Se adapta a la altura disponible */
+                right: 20px;
+                bottom: 90px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            /* Ajustes extremos para pantallas muy pequeñas */
+            .chat-window {
+                width: calc(100% - 20px);
+                right: 10px;
+                height: 75vh;
+            }
+            .chat-widget {
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabecera y Navegación -->
+    <header>
+        <div class="logo-container">
+            <div class="logo">NN <span>WEB STUDIO</span></div>
+            <div class="tagline">Desarrollo Web para Negocios</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#beneficios">Beneficios</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sección Hero -->
+    <section id="inicio" class="hero">
+        <h1>Creamos páginas web para hacer crecer tu negocio</h1>
+        <p>Atrae más clientes y aumenta tus ventas con un sitio web profesional, rápido y diseñado estratégicamente para emprendedores y negocios que buscan resultados reales.</p>
+        <a href="#contacto" class="btn">Solicita Información</a>
+    </section>
+
+    <!-- Sección de Servicios -->
+    <section id="servicios" class="services">
+        <h2>Nuestras Soluciones</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Páginas Web Corporativas</h3>
+                <p>Sitios web profesionales, rápidos y adaptados a cualquier dispositivo móvil. Diseñados para presentar tu marca de forma impecable y generar confianza en tus clientes.</p>
+            </div>
+            <div class="card">
+                <h3>Catálogos para Tiendas</h3>
+                <p>Muestra tus productos de forma atractiva. Creamos catálogos digitales dinámicos e intuitivos, ideales para comercios, venta de accesorios y optimización de pedidos.</p>
+            </div>
+            <div class="card">
+                <h3>Plataformas a Medida</h3>
+                <p>Desarrollamos páginas y herramientas web personalizadas según las necesidades de tu negocio. Nos adaptamos a ti para crear la solución exacta que requieres.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Beneficios -->
+    <section id="beneficios" class="services bg-white">
+        <h2>¿Por qué tener una página web?</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Disponibilidad Continua</h3>
+                <p>Disponible para tus clientes 24/7.</p>
+            </div>
+            <div class="card">
+                <h3>Imagen Corporativa</h3>
+                <p>Genera más confianza y profesionalismo.</p>
+            </div>
+            <div class="card">
+                <h3>Gestión Eficiente</h3>
+                <p>Muestra tus productos y servicios de forma organizada.</p>
+            </div>
+            <div class="card">
+                <h3>Conexión Directa</h3>
+                <p>Facilita el contacto directo por WhatsApp.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Sobre Nosotros -->
+    <section id="nosotros" class="about">
+        <div class="about-text">
+            <h2>¿Qué es NN Web Studio?</h2>
+            <p>Somos un estudio de desarrollo web apasionado por impulsar el éxito de emprendedores y pequeñas empresas. No solo hacemos páginas, construimos herramientas digitales que trabajan para ti.</p>
+            <p>Trabajamos de la mano contigo para entender tus objetivos comerciales, brindándote un trato cercano, transparente y profesional. Nos enfocamos en entregar interfaces limpias, código bien estructurado y diseños modernos que se ven increíbles en cualquier dispositivo, garantizando que tu presencia en línea transmita absoluta confianza y calidad.</p>
+        </div>
+    </section>
+
+    <!-- Pie de página / Contacto -->
+    <footer id="contacto">
+        <h2>¿Listo para impulsar tu negocio en internet?</h2>
+        <p class="contact-phrase">Contáctanos hoy mismo.</p>
+        
+        <div class="contact-buttons">
+            <a href="https://wa.me/526442252598" target="_blank" rel="noopener noreferrer" class="btn-social btn-whatsapp">
+                Contactar por WhatsApp
+            </a>
+            <a href="https://instagram.com/nnweb_studio" target="_blank" rel="noopener noreferrer" class="btn-social btn-instagram">
+                Ver Instagram
+            </a>
+        </div>
+        
+        <div class="footer-extra-info">
+            <p>Instagram: @nnweb_studio</p>
+        </div>
+
+        <p class="copyright">&copy; 2026 NN Web Studio. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- ==================== WIDGET CHATBOT ==================== -->
+    <div class="chat-widget">
+        <!-- Ventana del Chat -->
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <span>Asistente NN Web Studio</span>
+                <button class="chat-close-btn" id="closeChatBtn">&times;</button>
+            </div>
+            
+            <div class="chat-body" id="chatBody">
+                <!-- Mensaje de bienvenida inicial -->
+                <div class="chat-msg bot">¡Hola! Soy el asistente de NN Web Studio. ¿En qué puedo ayudarte?</div>
+            </div>
+
+            <!-- Opciones Interactivas -->
+            <div class="chat-options" id="chatOptions">
+                <button class="chat-option-btn" onclick="handleOptionClick('¿Qué servicios ofrecen?')">¿Qué servicios ofrecen?</button>
+                <button class="chat-option-btn" onclick="handleOptionClick('¿Cuánto tarda una página web?')">¿Cuánto tarda una página web?</button>
+                <button class="chat-option-btn" onclick="handleOptionClick('¿Cómo puedo contactarlos?')">¿Cómo puedo contactarlos?</button>
+                <button class="chat-option-btn" onclick="handleOptionClick('¿Qué incluye una página web?')">¿Qué incluye una página web?</button>
+                <button class="chat-option-btn special" onclick="openWhatsApp()">Quiero solicitar información</button>
+            </div>
+        </div>
+
+        <!-- Botón flotante para abrir el Chat -->
+        <button class="chat-toggle-btn" id="openChatBtn" aria-label="Abrir Chat">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z"/>
+                <path d="M7 9H17V11H7V9Z"/>
+                <path d="M7 12H14V14H7V12Z"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+        /* --- 1. CONFIGURACIÓN DE RESTAURACIÓN DE SCROLL --- */
+        // Evita que el navegador guarde la posición del scroll al recargar la página
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        // Fuerza el inicio de la página cada vez que se carga
+        window.addEventListener('load', () => {
+            window.scrollTo(0, 0);
+        });
+
+        /* --- 2. LÓGICA DE SCROLL SUAVE PARA LA NAVEGACIÓN --- */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        /* --- 3. LÓGICA DEL CHATBOT --- */
+        // Referencias a los elementos del DOM
+        const chatWindow = document.getElementById('chatWindow');
+        const openChatBtn = document.getElementById('openChatBtn');
+        const closeChatBtn = document.getElementById('closeChatBtn');
+        const chatBody = document.getElementById('chatBody');
+        const chatOptions = document.getElementById('chatOptions');
+
+        // Base de datos de respuestas preprogramadas
+        const faqDatabase = {
+            "¿Qué servicios ofrecen?": "Creamos páginas web para negocios, catálogos digitales y soluciones web personalizadas.",
+            "¿Cuánto tarda una página web?": "El tiempo de entrega depende del proyecto, pero la mayoría de las páginas se completan en 1-2 dias.",
+            "¿Cómo puedo contactarlos?": "Puedes escribirnos por WhatsApp o Instagram utilizando los botones de contacto disponibles en la página.",
+            "¿Qué incluye una página web?": "Diseño adaptable a celulares, botón de WhatsApp, optimización básica y publicación en internet."
+        };
+
+        // Eventos para abrir y cerrar la ventana del chat
+        openChatBtn.addEventListener('click', () => {
+            chatWindow.classList.add('active');
+        });
+
+        closeChatBtn.addEventListener('click', () => {
+            chatWindow.classList.remove('active');
+        });
+
+        // Función para renderizar los mensajes en el chat
+        function appendMessage(text, sender) {
+            const msgElement = document.createElement('div');
+            msgElement.classList.add('chat-msg', sender);
+            msgElement.textContent = text;
+            chatBody.appendChild(msgElement);
+            
+            // Auto-scroll hacia el último mensaje
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // Función que maneja el click en las opciones
+        function handleOptionClick(question) {
+            // Mostrar la pregunta del usuario
+            appendMessage(question, 'user');
+
+            // Ocultar opciones momentáneamente para dar sensación de procesamiento (opcional pero más profesional)
+            chatOptions.style.pointerEvents = 'none';
+            chatOptions.style.opacity = '0.7';
+
+            // Simular un pequeño retraso de respuesta natural (500ms)
+            setTimeout(() => {
+                const answer = faqDatabase[question];
+                if (answer) {
+                    appendMessage(answer, 'bot');
+                }
+                
+                // Restaurar los botones de opciones
+                chatOptions.style.pointerEvents = 'all';
+                chatOptions.style.opacity = '1';
+            }, 500);
+        }
+
+        // Función especial para la opción de contacto de WhatsApp
+        function openWhatsApp() {
+            const whatsappUrl = "https://wa.me/526442252598?text=Hola,%20me%20interesa%20una%20pagina%20web%20para%20mi%20negocio";
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
