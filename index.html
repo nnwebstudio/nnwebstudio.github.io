@@ -12,8 +12,8 @@
     <meta property="og:title" content="NN Web Studio | Creamos páginas web para hacer crecer tu negocio">
     <meta property="og:description" content="Atrae más clientes y aumenta tus ventas con un sitio web profesional y diseñado estratégicamente para tu negocio.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.tudominio.com"> <!-- REEMPLAZA ESTO CON LA URL DE TU PÁGINA -->
-    <meta property="og:image" content="https://www.tudominio.com/imagen-preview.jpg"> <!-- REEMPLAZA ESTO CON UNA IMAGEN DE PREVIEW DE TU SITIO -->
+    <meta property="og:url" content="https://www.tudominio.com">
+    <meta property="og:image" content="https://www.tudominio.com/imagen-preview.jpg">
     
     <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -36,6 +36,7 @@
             --chat-bg: #f1f5f9;
             --bot-msg: #e2e8f0;
             --user-msg: #3b82f6;
+            --success-color: #10b981;
             
             /* Tipografías */
             --font-heading: 'Poppins', sans-serif;
@@ -61,7 +62,7 @@
             color: var(--primary-color);
         }
 
-        /* ==================== ANIMACIONES SCROLL ==================== */
+        /* ==================== ANIMACIONES SCROLL ==================== -->
         .fade-in-up {
             opacity: 0;
             transform: translateY(40px);
@@ -258,7 +259,7 @@
             gap: 2.5rem;
         }
 
-        /* Tarjetas (Servicios y Beneficios) */
+        /* Tarjetas */
         .card {
             background-color: var(--white);
             padding: 3rem 2rem;
@@ -297,7 +298,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Proceso de Trabajo (NUEVO) */
+        /* Proceso de Trabajo */
         .process-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -394,7 +395,7 @@
             color: #94a3b8;
         }
 
-        /* Formulario de Contacto (NUEVO) */
+        /* Formulario de Contacto */
         .contact-form-container {
             max-width: 600px;
             margin: 0 auto 4rem auto;
@@ -403,6 +404,7 @@
             border-radius: 16px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.2);
             text-align: left;
+            position: relative;
         }
 
         .form-group {
@@ -456,6 +458,22 @@
         .btn-submit:hover {
             background-color: #2563eb;
             transform: translateY(-2px);
+        }
+
+        /* Mensaje de éxito flotante dentro del formulario */
+        .form-success-msg {
+            display: none;
+            background-color: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            color: #065f46;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            animation: fadeInChat 0.4s ease;
         }
 
         /* Botones de Redes Sociales */
@@ -568,9 +586,7 @@
         }
 
         @media (max-width: 768px) {
-            /* Menú Móvil */
             .hamburger { display: block; }
-            
             nav {
                 position: fixed;
                 top: 70px;
@@ -585,18 +601,13 @@
                 justify-content: center;
                 transition: left 0.4s ease;
             }
-
             nav.active { left: 0; }
-            
             nav ul { flex-direction: column; gap: 2.5rem; }
             nav a { font-size: 1.5rem; }
-
             .hero h1 { font-size: 2.2rem; }
             .contact-buttons { flex-direction: column; align-items: center; }
             .btn-social { width: 100%; max-width: 350px; }
             .contact-form-container { padding: 1.5rem; }
-            
-            /* Chatbot Mobile */
             .chat-window { width: calc(100% - 40px); height: 70vh; right: 20px; bottom: 90px; }
         }
     </style>
@@ -610,7 +621,6 @@
             <div class="tagline">Desarrollo Web para Negocios</div>
         </div>
         
-        <!-- Botón Hamburguesa -->
         <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú">
             <svg viewBox="0 0 24 24">
                 <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
@@ -694,7 +704,7 @@
         </div>
     </section>
 
-    <!-- Sección Proceso de Trabajo (NUEVO) -->
+    <!-- Sección Proceso de Trabajo -->
     <section id="proceso" class="section-padding bg-white text-center">
         <h2 class="section-title fade-in-up">Nuestro Proceso de Trabajo</h2>
         <p class="section-subtitle fade-in-up">4 pasos simples para llevar tu negocio al siguiente nivel digital sin complicaciones.</p>
@@ -740,11 +750,15 @@
         <h2 class="fade-in-up">¿Listo para impulsar tu negocio?</h2>
         <p class="contact-phrase fade-in-up">Déjanos un mensaje o contáctanos por redes sociales.</p>
         
-        <!-- Formulario de Contacto (ACTUALIZADO CON TELÉFONO) -->
+        <!-- Formulario de Contacto con AJAX (SIN REDIRECCIÓN VISUAL) -->
         <div class="contact-form-container fade-in-up">
-            <!-- FormSubmit apunta a tu correo. El primer correo que te envíen requerirá que verifiques tu bandeja -->
-            <form action="https://formsubmit.co/studionnweb@gmail.com" method="POST">
-                <!-- Configuración de FormSubmit (Oculta) -->
+            <!-- Mensaje de éxito flotante -->
+            <div id="formSuccessMessage" class="form-success-msg">
+                ¡Gracias! Tu mensaje ha sido enviado con éxito. Nos pondremos en contacto contigo muy pronto.
+            </div>
+
+            <form id="contactForm" action="https://formsubmit.co/ajax/studionnweb@gmail.com" method="POST">
+                <!-- Configuración de FormSubmit para AJAX -->
                 <input type="hidden" name="_subject" value="¡Nuevo prospecto desde la web de NN Web Studio!">
                 <input type="hidden" name="_captcha" value="false">
                 
@@ -758,7 +772,6 @@
                     <input type="email" id="email" name="email" class="form-control" placeholder="tu@correo.com" required>
                 </div>
 
-                <!-- NUEVO CAMPO DE TELÉFONO -->
                 <div class="form-group">
                     <label for="phone">Teléfono / WhatsApp</label>
                     <input type="tel" id="phone" name="phone" class="form-control" placeholder="Ej. 644 123 4567" required>
@@ -780,7 +793,7 @@
                     <textarea id="message" name="message" class="form-control" placeholder="¿Qué necesitas que haga tu página web?" required></textarea>
                 </div>
                 
-                <button type="submit" class="btn-submit">Enviar Mensaje</button>
+                <button type="submit" id="submitBtn" class="btn-submit">Enviar Mensaje</button>
             </form>
         </div>
 
@@ -899,7 +912,43 @@
             observer.observe(element);
         });
 
-        /* --- 4. LÓGICA DEL CHATBOT --- */
+        /* --- 4. ENVÍO DE FORMULARIO POR AJAX (SIN SALIR DE LA PÁGINA) --- */
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('formSuccessMessage');
+        const submitBtn = document.getElementById('submitBtn');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            submitBtn.textContent = "Enviando...";
+            submitBtn.disabled = true;
+
+            const formData = new FormData(contactForm);
+
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    contactForm.reset();
+                    contactForm.style.display = 'none'; // Oculta el formulario
+                    successMessage.style.display = 'block'; // Muestra el mensaje de éxito bonito
+                } else {
+                    alert('Hubo un problema al enviar el mensaje. Inténtalo de nuevo.');
+                    submitBtn.textContent = "Enviar Mensaje";
+                    submitBtn.disabled = false;
+                }
+            }).catch(error => {
+                alert('Error de conexión. Verifica tu internet e inténtalo de nuevo.');
+                submitBtn.textContent = "Enviar Mensaje";
+                submitBtn.disabled = false;
+            });
+        });
+
+        /* --- 5. LÓGICA DEL CHATBOT --- */
         const chatWindow = document.getElementById('chatWindow');
         const openChatBtn = document.getElementById('openChatBtn');
         const closeChatBtn = document.getElementById('closeChatBtn');
