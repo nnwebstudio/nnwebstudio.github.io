@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,15 +17,19 @@
     <meta property="og:image" content="https://www.tudominio.com/imagen-preview.jpg"> <!-- REEMPLAZA ESTO CON UNA IMAGEN DE PREVIEW DE TU SITIO -->
     
     <!-- Favicon -->
-    <!-- COLOCA TU ARCHIVO FAVICON (por ejemplo, favicon.png o favicon.ico) EN LA MISMA CARPETA QUE ESTE ARCHIVO HTML Y ACTUALIZA EL NOMBRE ABAJO SI ES NECESARIO -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- ==================== FUENTES DE GOOGLE ==================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
     <style>
         /* Variables de color y tipografía */
         :root {
             --primary-color: #0f172a;
             --accent-color: #3b82f6;
-            --text-color: #333;
+            --text-color: #334155;
             --bg-light: #f8fafc;
             --white: #ffffff;
             --whatsapp-color: #25D366;
@@ -33,47 +37,79 @@
             --chat-bg: #f1f5f9;
             --bot-msg: #e2e8f0;
             --user-msg: #3b82f6;
+            
+            /* Tipografías */
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
+            font-family: var(--font-body);
             color: var(--text-color);
             background-color: var(--bg-light);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Navegación */
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+        }
+
+        /* ==================== ANIMACIONES SCROLL ==================== */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navegación y Header */
         header {
             background-color: var(--primary-color);
             color: var(--white);
-            padding: 1rem 5%;
+            padding: 1.5rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Header al hacer scroll */
+        header.scrolled {
+            padding: 0.8rem 5%;
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
 
         .logo-container {
             display: flex;
             flex-direction: column;
             justify-content: center;
+            z-index: 1001;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            letter-spacing: 1px;
+            font-size: 1.6rem;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            letter-spacing: 0.5px;
             line-height: 1.2;
+            color: var(--white);
         }
 
         .logo span {
@@ -82,21 +118,23 @@
 
         .tagline {
             font-size: 0.8rem;
-            color: #cbd5e1;
-            font-weight: 400;
-            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 500;
         }
 
+        /* Menú Desktop */
         nav ul {
             list-style: none;
             display: flex;
             gap: 2rem;
+            align-items: center;
         }
 
         nav a {
-            color: var(--white);
+            color: #e2e8f0;
             text-decoration: none;
             font-weight: 500;
+            font-size: 0.95rem;
             transition: color 0.3s;
         }
 
@@ -104,30 +142,68 @@
             color: var(--accent-color);
         }
 
-        /* Hero Section */
+        /* Botón Hamburguesa */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+            background: none;
+            border: none;
+        }
+
+        .hamburger svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--white);
+        }
+
+        /* Hero Section (Con imagen dividida) */
         .hero {
             background: linear-gradient(135deg, var(--primary-color) 0%, #1e293b 100%);
             color: var(--white);
-            text-align: center;
-            padding: 7rem 5%;
+            padding: 8rem 5% 6rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
         }
 
         .hero h1 {
+            color: var(--white);
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
-            line-height: 1.2;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            line-height: 1.1;
         }
 
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             margin-bottom: 2.5rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
             color: #cbd5e1;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
         }
 
         .btn {
@@ -137,7 +213,8 @@
             padding: 1rem 2.5rem;
             text-decoration: none;
             border-radius: 8px;
-            font-weight: bold;
+            font-family: var(--font-heading);
+            font-weight: 700;
             font-size: 1.1rem;
             transition: all 0.3s ease;
             border: none;
@@ -150,9 +227,12 @@
             box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
         }
 
-        /* Secciones Generales (Servicios y Beneficios) */
-        .services {
+        /* Secciones Generales */
+        .section-padding {
             padding: 6rem 5%;
+        }
+
+        .text-center {
             text-align: center;
         }
 
@@ -160,10 +240,18 @@
             background-color: var(--white);
         }
 
-        .services h2 {
+        .section-title {
             font-size: 2.5rem;
-            margin-bottom: 3.5rem;
-            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .grid {
@@ -172,58 +260,131 @@
             gap: 2.5rem;
         }
 
+        /* Tarjetas */
         .card {
             background-color: var(--white);
             padding: 3rem 2rem;
-            border-radius: 12px;
+            border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             height: 100%;
-        }
-
-        .bg-white .card {
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             border: 1px solid #f1f5f9;
         }
 
         .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
+            border-color: #e2e8f0;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #eff6ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--accent-color);
         }
 
         .card h3 {
             font-size: 1.4rem;
             margin-bottom: 1rem;
-            color: var(--accent-color);
+        }
+
+        /* Portafolio (Nuevo) */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            aspect-ratio: 4/3;
+            background-color: #e2e8f0;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(15,23,42,0.9), transparent);
+            padding: 2rem 1.5rem 1.5rem;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .portfolio-overlay h3 {
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-overlay p {
+            color: #cbd5e1;
+            font-size: 0.9rem;
         }
 
         /* Sobre Nosotros */
         .about {
-            padding: 6rem 5%;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             gap: 4rem;
-            flex-wrap: wrap;
+        }
+
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
         .about-text {
             flex: 1;
-            min-width: 300px;
-            max-width: 800px;
-            text-align: center;
         }
 
-        .about h2 {
+        .about-text h2 {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            color: var(--primary-color);
         }
 
-        .about p {
+        .about-text p {
             font-size: 1.1rem;
-            color: #475569;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         /* Footer / Contacto */
@@ -231,10 +392,11 @@
             background-color: var(--primary-color);
             color: var(--white);
             text-align: center;
-            padding: 5rem 5%;
+            padding: 6rem 5% 3rem;
         }
 
         footer h2 {
+            color: var(--white);
             font-size: 2.5rem;
             margin-bottom: 1rem;
         }
@@ -242,10 +404,7 @@
         footer p.contact-phrase {
             font-size: 1.2rem;
             margin-bottom: 3rem;
-            color: #cbd5e1;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            color: #94a3b8;
         }
 
         .contact-buttons {
@@ -253,21 +412,29 @@
             justify-content: center;
             gap: 1.5rem;
             flex-wrap: wrap;
-            margin-bottom: 2rem;
+            margin-bottom: 4rem;
         }
 
         .btn-social {
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 10px;
             padding: 1.2rem 2.5rem;
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.1rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
             color: var(--white);
             text-decoration: none;
             border-radius: 50px;
             transition: all 0.3s ease;
-            min-width: 280px;
+            min-width: 250px;
+        }
+
+        .btn-social svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--white);
         }
 
         .btn-whatsapp {
@@ -291,12 +458,6 @@
             box-shadow: 0 10px 25px rgba(193, 53, 132, 0.4);
             filter: brightness(1.1);
         }
-        
-        .footer-extra-info {
-            font-size: 1.1rem;
-            color: #cbd5e1;
-            margin-bottom: 3rem;
-        }
 
         .copyright {
             margin-top: 2rem;
@@ -306,297 +467,226 @@
             padding-top: 2rem;
         }
 
-        /* ==================== CHATBOT STYLES ==================== */
-        .chat-widget {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 9999;
+        /* ==================== CHATBOT ==================== */
+        /* (Se mantienen los estilos originales del chatbot, solo ajustando tipografía) */
+        .chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
+        .chat-toggle-btn { width: 60px; height: 60px; background-color: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); transition: transform 0.3s ease, background-color 0.3s ease; border: none; }
+        .chat-toggle-btn:hover { transform: scale(1.1); background-color: #2563eb; }
+        .chat-toggle-btn svg { width: 30px; height: 30px; fill: var(--white); }
+        .chat-window { position: fixed; bottom: 90px; right: 20px; width: 350px; height: 500px; max-height: 80vh; background-color: var(--white); border-radius: 16px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); display: flex; flex-direction: column; overflow: hidden; opacity: 0; transform: translateY(20px) scale(0.95); pointer-events: none; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); z-index: 9999; border: 1px solid #e2e8f0;}
+        .chat-window.active { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
+        .chat-header { background-color: var(--primary-color); color: var(--white); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-heading); font-weight: 600; }
+        .chat-close-btn { background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; transition: color 0.3s; }
+        .chat-close-btn:hover { color: var(--accent-color); }
+        .chat-body { flex: 1; padding: 20px; background-color: var(--chat-bg); overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .chat-msg { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 0.95rem; line-height: 1.4; animation: fadeInChat 0.3s ease; }
+        .chat-msg.bot { background-color: var(--bot-msg); color: var(--text-color); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .chat-msg.user { background-color: var(--user-msg); color: var(--white); align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chat-options { padding: 15px; background-color: var(--white); border-top: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 8px; }
+        .chat-option-btn { font-family: var(--font-body); background-color: var(--bg-light); border: 1px solid #cbd5e1; color: var(--text-color); padding: 10px 15px; border-radius: 20px; font-size: 0.9rem; text-align: left; cursor: pointer; transition: all 0.2s ease; }
+        .chat-option-btn:hover { background-color: var(--bot-msg); border-color: var(--accent-color); color: var(--primary-color); }
+        .chat-option-btn.special { background-color: var(--whatsapp-color); color: var(--white); border-color: var(--whatsapp-color); font-weight: bold; text-align: center; }
+        .chat-option-btn.special:hover { background-color: #20BA56; }
+        @keyframes fadeInChat { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 992px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 6rem; }
+            .hero-text { max-width: 100%; }
+            .hero h1 { font-size: 2.8rem; }
+            .about { flex-direction: column-reverse; text-align: center; }
         }
 
-        .chat-toggle-btn {
-            width: 60px;
-            height: 60px;
-            background-color: var(--accent-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            border: none;
-        }
-
-        .chat-toggle-btn:hover {
-            transform: scale(1.1);
-            background-color: #2563eb;
-        }
-
-        .chat-toggle-btn svg {
-            width: 30px;
-            height: 30px;
-            fill: var(--white);
-        }
-
-        .chat-window {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 350px;
-            height: 500px;
-            max-height: 80vh;
-            background-color: var(--white);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(20px) scale(0.95);
-            pointer-events: none;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            z-index: 9999;
-        }
-
-        .chat-window.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            pointer-events: all;
-        }
-
-        .chat-header {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: bold;
-        }
-
-        .chat-close-btn {
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .chat-close-btn:hover {
-            color: var(--accent-color);
-        }
-
-        .chat-body {
-            flex: 1;
-            padding: 20px;
-            background-color: var(--chat-bg);
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .chat-msg {
-            max-width: 85%;
-            padding: 12px 16px;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            line-height: 1.4;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .chat-msg.bot {
-            background-color: var(--bot-msg);
-            color: var(--text-color);
-            align-self: flex-start;
-            border-bottom-left-radius: 4px;
-        }
-
-        .chat-msg.user {
-            background-color: var(--user-msg);
-            color: var(--white);
-            align-self: flex-end;
-            border-bottom-right-radius: 4px;
-        }
-
-        .chat-options {
-            padding: 15px;
-            background-color: var(--white);
-            border-top: 1px solid #e2e8f0;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .chat-option-btn {
-            background-color: var(--bg-light);
-            border: 1px solid #cbd5e1;
-            color: var(--text-color);
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .chat-option-btn:hover {
-            background-color: var(--bot-msg);
-            border-color: var(--accent-color);
-            color: var(--primary-color);
-        }
-
-        .chat-option-btn.special {
-            background-color: var(--whatsapp-color);
-            color: var(--white);
-            border-color: var(--whatsapp-color);
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .chat-option-btn.special:hover {
-            background-color: #20BA56;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            nav ul {
-                display: none;
-            }
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            .contact-buttons {
+            /* Menú Móvil */
+            .hamburger { display: block; }
+            
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: rgba(15, 23, 42, 0.98);
+                backdrop-filter: blur(10px);
+                display: flex;
                 flex-direction: column;
                 align-items: center;
+                justify-content: center;
+                transition: left 0.4s ease;
             }
-            .btn-social {
-                width: 100%;
-                max-width: 350px;
-            }
+
+            nav.active { left: 0; }
             
-            /* Ajustes del chatbot para móviles */
-            .chat-window {
-                width: calc(100% - 40px); /* Ocupa casi todo el ancho */
-                height: 70vh; /* Se adapta a la altura disponible */
-                right: 20px;
-                bottom: 90px;
-            }
-        }
-        
-        @media (max-width: 400px) {
-            /* Ajustes extremos para pantallas muy pequeñas */
-            .chat-window {
-                width: calc(100% - 20px);
-                right: 10px;
-                height: 75vh;
-            }
-            .chat-widget {
-                right: 10px;
-            }
+            nav ul { flex-direction: column; gap: 2.5rem; }
+            nav a { font-size: 1.5rem; }
+
+            .hero h1 { font-size: 2.2rem; }
+            .contact-buttons { flex-direction: column; align-items: center; }
+            .btn-social { width: 100%; max-width: 350px; }
+            
+            /* Chatbot Mobile */
+            .chat-window { width: calc(100% - 40px); height: 70vh; right: 20px; bottom: 90px; }
         }
     </style>
 </head>
 <body>
 
     <!-- Cabecera y Navegación -->
-    <header>
+    <header id="main-header">
         <div class="logo-container">
             <div class="logo">NN <span>WEB STUDIO</span></div>
             <div class="tagline">Desarrollo Web para Negocios</div>
         </div>
-        <nav>
+        
+        <!-- Botón Hamburguesa -->
+        <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+            </svg>
+        </button>
+
+        <nav id="nav-menu">
             <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#beneficios">Beneficios</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#servicios" class="nav-link">Servicios</a></li>
+                <li><a href="#portafolio" class="nav-link">Portafolio</a></li>
+                <li><a href="#beneficios" class="nav-link">Beneficios</a></li>
+                <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+                <li><a href="#contacto" class="nav-link">Contacto</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Sección Hero -->
-    <section id="inicio" class="hero">
-        <h1>Creamos páginas web para hacer crecer tu negocio</h1>
-        <p>Atrae más clientes y aumenta tus ventas con un sitio web profesional, rápido y diseñado estratégicamente para emprendedores y negocios que buscan resultados reales.</p>
-        <a href="#contacto" class="btn">Solicita Información</a>
+    <section id="inicio" class="hero fade-in-up">
+        <div class="hero-text">
+            <h1>Creamos páginas web para hacer crecer tu negocio</h1>
+            <p>Atrae más clientes y aumenta tus ventas con un sitio web profesional, rápido y diseñado estratégicamente para emprendedores y negocios que buscan resultados reales.</p>
+            <a href="#contacto" class="btn">Solicita Información</a>
+        </div>
+        <div class="hero-image">
+            <!-- REEMPLAZA ESTA IMAGEN CON UNA TUYA O UN MOCKUP DE UNA WEB -->
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Diseño web profesional">
+        </div>
     </section>
 
     <!-- Sección de Servicios -->
-    <section id="servicios" class="services">
-        <h2>Nuestras Soluciones</h2>
+    <section id="servicios" class="section-padding text-center bg-white">
+        <h2 class="section-title fade-in-up">Nuestras Soluciones</h2>
+        <p class="section-subtitle fade-in-up">Desarrollamos herramientas digitales que se adaptan a las necesidades específicas de tu empresa.</p>
+        
         <div class="grid">
-            <div class="card">
+            <div class="card fade-in-up">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/></svg>
+                </div>
                 <h3>Páginas Web Corporativas</h3>
-                <p>Sitios web profesionales, rápidos y adaptados a cualquier dispositivo móvil. Diseñados para presentar tu marca de forma impecable y generar confianza en tus clientes.</p>
+                <p>Sitios web profesionales, rápidos y adaptados a cualquier dispositivo móvil. Diseñados para presentar tu marca de forma impecable.</p>
             </div>
-            <div class="card">
+            <div class="card fade-in-up">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24"><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12zm-7-8c-1.66 0-3-1.34-3-3H7c0 2.76 2.24 5 5 5s5-2.24 5-5h-2c0 1.66-1.34 3-3 3z"/></svg>
+                </div>
                 <h3>Catálogos para Tiendas</h3>
-                <p>Muestra tus productos de forma atractiva. Creamos catálogos digitales dinámicos e intuitivos, ideales para comercios, venta de accesorios y optimización de pedidos.</p>
+                <p>Muestra tus productos de forma atractiva. Creamos catálogos digitales dinámicos e intuitivos, ideales para optimizar tus pedidos.</p>
             </div>
-            <div class="card">
+            <div class="card fade-in-up">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                </div>
                 <h3>Plataformas a Medida</h3>
-                <p>Desarrollamos páginas y herramientas web personalizadas según las necesidades de tu negocio. Nos adaptamos a ti para crear la solución exacta que requieres.</p>
+                <p>Desarrollamos herramientas web personalizadas. Nos adaptamos a ti para crear la solución exacta que requieres para tu logística interna.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Portafolio (NUEVO) -->
+    <section id="portafolio" class="section-padding text-center">
+        <h2 class="section-title fade-in-up">Nuestro Trabajo</h2>
+        <p class="section-subtitle fade-in-up">Algunos de los proyectos que hemos desarrollado para impulsar a otros emprendedores.</p>
+        
+        <div class="portfolio-grid">
+            <!-- Proyecto 1 -->
+            <div class="portfolio-item fade-in-up">
+                <!-- REEMPLAZA CON IMAGEN DE TU PROYECTO -->
+                <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=600&q=80" alt="Proyecto 1">
+                <div class="portfolio-overlay">
+                    <h3>Clínica Dental Sonrisas</h3>
+                    <p>Sitio web corporativo y sistema de citas.</p>
+                </div>
+            </div>
+            <!-- Proyecto 2 -->
+            <div class="portfolio-item fade-in-up">
+                <!-- REEMPLAZA CON IMAGEN DE TU PROYECTO -->
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Proyecto 2">
+                <div class="portfolio-overlay">
+                    <h3>Boutique Elegance</h3>
+                    <p>Catálogo digital con integración a WhatsApp.</p>
+                </div>
+            </div>
+            <!-- Proyecto 3 -->
+            <div class="portfolio-item fade-in-up">
+                <!-- REEMPLAZA CON IMAGEN DE TU PROYECTO -->
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Proyecto 3">
+                <div class="portfolio-overlay">
+                    <h3>Restaurante El Sabor</h3>
+                    <p>Menú interactivo con código QR.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Sección Beneficios -->
-    <section id="beneficios" class="services bg-white">
-        <h2>¿Por qué tener una página web?</h2>
+    <section id="beneficios" class="section-padding bg-white text-center">
+        <h2 class="section-title fade-in-up">¿Por qué tener una página web?</h2>
+        <p class="section-subtitle fade-in-up">Da el salto al mundo digital y disfruta de ventajas exclusivas para tu negocio.</p>
         <div class="grid">
-            <div class="card">
+            <div class="card fade-in-up">
+                <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg></div>
                 <h3>Disponibilidad Continua</h3>
-                <p>Disponible para tus clientes 24/7.</p>
+                <p>Tu negocio abierto y disponible para tus clientes las 24 horas del día, los 7 días de la semana.</p>
             </div>
-            <div class="card">
+            <div class="card fade-in-up">
+                <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
                 <h3>Imagen Corporativa</h3>
-                <p>Genera más confianza y profesionalismo.</p>
+                <p>Genera más confianza, profesionalismo y credibilidad ante nuevos clientes potenciales.</p>
             </div>
-            <div class="card">
+            <div class="card fade-in-up">
+                <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 9h-2V7h-2v5H6v-2h2V7c0-1.1.9-2 2-2h2v7zm4 4h-6v2h6v-2zm0-4h-6v2h6v-2z"/></svg></div>
                 <h3>Gestión Eficiente</h3>
-                <p>Muestra tus productos y servicios de forma organizada.</p>
-            </div>
-            <div class="card">
-                <h3>Conexión Directa</h3>
-                <p>Facilita el contacto directo por WhatsApp.</p>
+                <p>Muestra tus productos, servicios y preguntas frecuentes de forma centralizada y automatizada.</p>
             </div>
         </div>
     </section>
 
     <!-- Sección Sobre Nosotros -->
-    <section id="nosotros" class="about">
-        <div class="about-text">
+    <section id="nosotros" class="section-padding about">
+        <div class="about-text fade-in-up">
             <h2>¿Qué es NN Web Studio?</h2>
-            <p>Somos un estudio de desarrollo web apasionado por impulsar el éxito de emprendedores y pequeñas empresas. No solo hacemos páginas, construimos herramientas digitales que trabajan para ti.</p>
-            <p>Trabajamos de la mano contigo para entender tus objetivos comerciales, brindándote un trato cercano, transparente y profesional. Nos enfocamos en entregar interfaces limpias, código bien estructurado y diseños modernos que se ven increíbles en cualquier dispositivo, garantizando que tu presencia en línea transmita absoluta confianza y calidad.</p>
+            <p>Somos un estudio de desarrollo web en Sonora apasionado por impulsar el éxito de emprendedores y pequeñas empresas. No solo hacemos páginas, construimos herramientas digitales que trabajan para ti.</p>
+            <p>Trabajamos de la mano contigo para entender tus objetivos comerciales, brindándote un trato cercano, transparente y profesional. Nos enfocamos en entregar interfaces limpias, código bien estructurado y diseños modernos que se ven increíbles en cualquier dispositivo.</p>
+        </div>
+        <div class="about-image fade-in-up">
+            <!-- REEMPLAZA CON FOTO DE TU EQUIPO O ÁREA DE TRABAJO -->
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Equipo NN Web Studio">
         </div>
     </section>
 
     <!-- Pie de página / Contacto -->
     <footer id="contacto">
-        <h2>¿Listo para impulsar tu negocio en internet?</h2>
-        <p class="contact-phrase">Contáctanos hoy mismo.</p>
+        <h2 class="fade-in-up">¿Listo para impulsar tu negocio?</h2>
+        <p class="contact-phrase fade-in-up">Hablemos sobre tu proyecto y descubramos cómo podemos ayudarte.</p>
         
-        <div class="contact-buttons">
+        <div class="contact-buttons fade-in-up">
             <a href="https://wa.me/526442252598" target="_blank" rel="noopener noreferrer" class="btn-social btn-whatsapp">
-                Contactar por WhatsApp
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp
             </a>
             <a href="https://instagram.com/nnweb_studio" target="_blank" rel="noopener noreferrer" class="btn-social btn-instagram">
-                Ver Instagram
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                Instagram
             </a>
-        </div>
-        
-        <div class="footer-extra-info">
-            <p>Instagram: @nnweb_studio</p>
         </div>
 
         <p class="copyright">&copy; 2026 NN Web Studio. Todos los derechos reservados.</p>
@@ -604,29 +694,24 @@
 
     <!-- ==================== WIDGET CHATBOT ==================== -->
     <div class="chat-widget">
-        <!-- Ventana del Chat -->
         <div class="chat-window" id="chatWindow">
             <div class="chat-header">
-                <span>Asistente NN Web Studio</span>
+                <span>Asistente NN</span>
                 <button class="chat-close-btn" id="closeChatBtn">&times;</button>
             </div>
             
             <div class="chat-body" id="chatBody">
-                <!-- Mensaje de bienvenida inicial -->
-                <div class="chat-msg bot">¡Hola! Soy el asistente de NN Web Studio. ¿En qué puedo ayudarte?</div>
+                <div class="chat-msg bot">¡Hola! Soy el asistente de NN Web Studio. ¿En qué puedo ayudarte hoy?</div>
             </div>
 
-            <!-- Opciones Interactivas -->
             <div class="chat-options" id="chatOptions">
                 <button class="chat-option-btn" onclick="handleOptionClick('¿Qué servicios ofrecen?')">¿Qué servicios ofrecen?</button>
                 <button class="chat-option-btn" onclick="handleOptionClick('¿Cuánto tarda una página web?')">¿Cuánto tarda una página web?</button>
                 <button class="chat-option-btn" onclick="handleOptionClick('¿Cómo puedo contactarlos?')">¿Cómo puedo contactarlos?</button>
-                <button class="chat-option-btn" onclick="handleOptionClick('¿Qué incluye una página web?')">¿Qué incluye una página web?</button>
-                <button class="chat-option-btn special" onclick="openWhatsApp()">Quiero solicitar información</button>
+                <button class="chat-option-btn special" onclick="openWhatsApp()">Hablar con un humano</button>
             </div>
         </div>
 
-        <!-- Botón flotante para abrir el Chat -->
         <button class="chat-toggle-btn" id="openChatBtn" aria-label="Abrir Chat">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z"/>
@@ -638,23 +723,45 @@
 
     <!-- ==================== SCRIPTS ==================== -->
     <script>
-        /* --- 1. CONFIGURACIÓN DE RESTAURACIÓN DE SCROLL --- */
-        // Evita que el navegador guarde la posición del scroll al recargar la página
+        /* --- 1. RESTAURACIÓN DE SCROLL --- */
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
-        // Fuerza el inicio de la página cada vez que se carga
-        window.addEventListener('load', () => {
-            window.scrollTo(0, 0);
+        window.addEventListener('load', () => window.scrollTo(0, 0));
+
+        /* --- 2. LÓGICA DE NAVEGACIÓN Y HEADER --- */
+        // Menú hamburguesa móvil
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
         });
 
-        /* --- 2. LÓGICA DE SCROLL SUAVE PARA LA NAVEGACIÓN --- */
+        // Cerrar menú al hacer click en un enlace
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Header Sticky que cambia al hacer scroll
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll Suave
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
-                
                 if (targetElement) {
                     targetElement.scrollIntoView({
                         behavior: 'smooth',
@@ -664,67 +771,66 @@
             });
         });
 
-        /* --- 3. LÓGICA DEL CHATBOT --- */
-        // Referencias a los elementos del DOM
+        /* --- 3. ANIMACIONES AL HACER SCROLL (Micro-interacciones) --- */
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15 // El elemento debe estar 15% visible para animarse
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Dejar de observar una vez animado
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(element => {
+            observer.observe(element);
+        });
+
+        /* --- 4. LÓGICA DEL CHATBOT --- */
         const chatWindow = document.getElementById('chatWindow');
         const openChatBtn = document.getElementById('openChatBtn');
         const closeChatBtn = document.getElementById('closeChatBtn');
         const chatBody = document.getElementById('chatBody');
         const chatOptions = document.getElementById('chatOptions');
 
-        // Base de datos de respuestas preprogramadas
         const faqDatabase = {
-            "¿Qué servicios ofrecen?": "Creamos páginas web para negocios, catálogos digitales y soluciones web personalizadas.",
-            "¿Cuánto tarda una página web?": "El tiempo de entrega depende del proyecto, pero la mayoría de las páginas se completan en 1-2 dias.",
+            "¿Qué servicios ofrecen?": "Creamos páginas web corporativas, catálogos digitales para tiendas y desarrollamos plataformas web a la medida de tu negocio.",
+            "¿Cuánto tarda una página web?": "El tiempo de entrega depende del tamaño del proyecto, pero la mayoría de las páginas web estándar se completan entre 3 a 7 días hábiles.",
             "¿Cómo puedo contactarlos?": "Puedes escribirnos por WhatsApp o Instagram utilizando los botones de contacto disponibles en la página.",
-            "¿Qué incluye una página web?": "Diseño adaptable a celulares, botón de WhatsApp, optimización básica y publicación en internet."
+            "¿Qué incluye una página web?": "Incluye diseño adaptable a celulares, botón de WhatsApp, optimización SEO básica, alojamiento inicial y publicación."
         };
 
-        // Eventos para abrir y cerrar la ventana del chat
-        openChatBtn.addEventListener('click', () => {
-            chatWindow.classList.add('active');
-        });
+        openChatBtn.addEventListener('click', () => chatWindow.classList.add('active'));
+        closeChatBtn.addEventListener('click', () => chatWindow.classList.remove('active'));
 
-        closeChatBtn.addEventListener('click', () => {
-            chatWindow.classList.remove('active');
-        });
-
-        // Función para renderizar los mensajes en el chat
         function appendMessage(text, sender) {
             const msgElement = document.createElement('div');
             msgElement.classList.add('chat-msg', sender);
             msgElement.textContent = text;
             chatBody.appendChild(msgElement);
-            
-            // Auto-scroll hacia el último mensaje
             chatBody.scrollTop = chatBody.scrollHeight;
         }
 
-        // Función que maneja el click en las opciones
         function handleOptionClick(question) {
-            // Mostrar la pregunta del usuario
             appendMessage(question, 'user');
-
-            // Ocultar opciones momentáneamente para dar sensación de procesamiento (opcional pero más profesional)
             chatOptions.style.pointerEvents = 'none';
             chatOptions.style.opacity = '0.7';
 
-            // Simular un pequeño retraso de respuesta natural (500ms)
             setTimeout(() => {
-                const answer = faqDatabase[question];
-                if (answer) {
-                    appendMessage(answer, 'bot');
-                }
-                
-                // Restaurar los botones de opciones
+                const answer = faqDatabase[question] || "Gracias por tu mensaje. Un asesor te responderá pronto.";
+                appendMessage(answer, 'bot');
                 chatOptions.style.pointerEvents = 'all';
                 chatOptions.style.opacity = '1';
-            }, 500);
+            }, 600);
         }
 
-        // Función especial para la opción de contacto de WhatsApp
         function openWhatsApp() {
-            const whatsappUrl = "https://wa.me/526442252598?text=Hola,%20me%20interesa%20una%20pagina%20web%20para%20mi%20negocio";
+            const whatsappUrl = "https://wa.me/526442252598?text=Hola,%20me%20interesa%20una%20página%20web%20para%20mi%20negocio";
             window.open(whatsappUrl, '_blank');
         }
     </script>
