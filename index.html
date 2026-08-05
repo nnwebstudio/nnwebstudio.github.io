@@ -1,1008 +1,1389 @@
 <!DOCTYPE html>
-<html lang="es-MX">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- ==================== SEO Y META ETIQUETAS ==================== -->
-    <title>NN Web Studio | Creamos páginas web para hacer crecer tu negocio</title>
-    <meta name="description" content="NN Web Studio: Desarrollo de páginas web profesionales, catálogos digitales y plataformas a medida para negocios y emprendedores. Impulsa tu presencia digital.">
-    
-    <!-- Open Graph (WhatsApp, Facebook, Instagram) -->
-    <meta property="og:title" content="NN Web Studio | Creamos páginas web para hacer crecer tu negocio">
-    <meta property="og:description" content="Atrae más clientes y aumenta tus ventas con un sitio web profesional y diseñado estratégicamente para tu negocio.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://nnwebstudio.github.io/">
-    <meta property="og:image" content="https://nnwebstudio.github.io/imagen-preview.jpg">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-
-    <!-- ==================== FUENTES DE GOOGLE ==================== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NN Web Studio | Premium Digital Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* Variables de color y tipografía */
+        /* === VARIABLES & PALETA DE COLORES === */
         :root {
-            --primary-color: #0f172a;
-            --accent-color: #3b82f6;
-            --text-color: #334155;
-            --bg-light: #f8fafc;
-            --white: #ffffff;
-            --whatsapp-color: #25D366;
-            --instagram-color: #C13584;
-            --chat-bg: #f1f5f9;
-            --bot-msg: #e2e8f0;
-            --user-msg: #3b82f6;
-            --success-color: #10b981;
+            --bg-color: #07070a;
+            --surface-color: rgba(255, 255, 255, 0.03);
+            --surface-border: rgba(255, 255, 255, 0.08);
             
-            /* Tipografías */
-            --font-heading: 'Poppins', sans-serif;
-            --font-body: 'Inter', sans-serif;
+            /* Colores Principales (Acentos en Azul Eléctrico y Rojo sutil) */
+            --accent-purple: #6d28d9;
+            --accent-blue: #00f0ff;
+            --accent-red: #ff003c;
+            --gradient-accent: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            
+            /* Glows y Sombras */
+            --glow-purple: rgba(109, 40, 217, 0.4);
+            --glow-blue: rgba(0, 240, 255, 0.35);
+            --glow-red: rgba(255, 0, 60, 0.3);
+            
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --safe-bottom: env(safe-area-inset-bottom, 20px);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: var(--font-body);
-            color: var(--text-color);
-            background-color: var(--bg-light);
-            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             overflow-x: hidden;
+            padding-bottom: calc(80px + var(--safe-bottom));
+            scroll-behavior: smooth;
         }
 
-        h1, h2, h3, h4 {
-            font-family: var(--font-heading);
-            color: var(--primary-color);
+        /* === SISTEMA DE PARTÍCULAS SUTIL === */
+        .particles-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -2;
+            background: radial-gradient(circle at 50% 50%, #0a0a0f 0%, #050507 100%);
+            overflow: hidden;
         }
 
-                /* ==================== ANIMACIONES SCROLL ==================== */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .fade-in-up.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
         }
 
-        /* Navegación y Header */
-        header {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 1.5rem 5%;
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        /* === PRELOADER PREMIUM === */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-color);
+            z-index: 10000;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
         }
 
-        header.scrolled {
-            padding: 0.8rem 5%;
-            background-color: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
 
-        .logo-container {
+        .preloader-content {
+            text-align: center;
+            animation: preloaderIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .preloader-title {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            filter: drop-shadow(0 0 20px var(--glow-blue));
+        }
+
+        .preloader-sub {
+            font-size: clamp(0.7rem, 3vw, 0.9rem);
+            color: var(--accent-blue);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+
+        @keyframes preloaderIn {
+            0% { opacity: 0; transform: scale(0.9) translateY(10px); filter: blur(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        }
+
+        /* === TIPOGRAFÍA & GLOBALES (CENTRADO PERFECTO) === */
+        h1, h2, h3 { font-weight: 800; letter-spacing: -1px; }
+        p { line-height: 1.6; color: var(--text-muted); font-weight: 300; }
+        
+        .section-title {
+            font-size: clamp(2rem, 6vw, 2.8rem);
+            margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
+            background: linear-gradient(135deg, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Contenedor Maestro para alinear y centrar todo */
+        .container {
+            width: min(100%, 1024px);
+            margin: 0 auto;
+            padding: 0 clamp(20px, 5vw, 40px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* === ANIMACIONES GENERALES === */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+            width: 100%;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* === APP NAV BAR (BOTTOM) === */
+        .bottom-nav {
+            position: fixed;
+            bottom: clamp(10px, 2vh, 20px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(92%, 420px);
+            height: 68px;
+            background: rgba(12, 12, 18, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 240, 255, 0.15);
+        }
+
+        .nav-item {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.72rem;
+            position: relative;
+            padding: 4px 8px;
+            transition: color 0.3s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+            margin-bottom: 3px;
+            fill: currentColor;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), fill 0.3s ease;
+        }
+
+        .nav-item:active { transform: scale(0.88); }
+        .nav-item.active { color: #fff; }
+        
+        .nav-item.active svg {
+            transform: scale(1.18);
+            fill: var(--accent-blue);
+            filter: drop-shadow(0 0 8px var(--glow-blue));
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            width: 0;
+            height: 3px;
+            background: var(--accent-blue);
+            border-radius: 10px;
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 8px var(--accent-blue);
+        }
+
+        .nav-item.active::after { width: 16px; }
+
+        .nav-fab {
+            background: var(--gradient-accent);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(-16px);
+            box-shadow: 0 10px 25px var(--glow-purple), 0 0 15px var(--glow-blue);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+        }
+
+        .nav-fab:active { transform: translateY(-12px) scale(0.92); }
+
+        /* === HERO SECTION === */
+        .hero {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            z-index: 1001;
-        }
-
-        .logo {
-            font-size: 1.6rem;
-            font-family: var(--font-heading);
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            line-height: 1.2;
-            color: var(--white);
-        }
-
-        .logo span {
-            color: var(--accent-color);
-        }
-
-        .tagline {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            font-weight: 500;
-        }
-
-        /* Menú Desktop */
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
             align-items: center;
+            position: relative;
+            padding-top: clamp(2rem, 10vh, 4rem);
+            padding-bottom: 2rem;
+            z-index: 1;
+        }
+        
+        .hero-blob {
+            position: absolute;
+            width: clamp(250px, 50vw, 400px);
+            height: clamp(250px, 50vw, 400px);
+            background: radial-gradient(circle, var(--accent-purple) 0%, var(--accent-blue) 100%);
+            filter: blur(120px);
+            border-radius: 50%;
+            opacity: 0.2;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+            animation: pulseGlow 7s infinite alternate ease-in-out;
         }
 
-        nav a {
-            color: #e2e8f0;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s;
+        @keyframes pulseGlow {
+            0% { transform: translate(-50%, 0) scale(1); opacity: 0.15; }
+            100% { transform: translate(-50%, 30px) scale(1.2); opacity: 0.3; }
         }
 
-        nav a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Botón Hamburguesa */
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            z-index: 1001;
-            background: none;
-            border: none;
-        }
-
-        .hamburger svg {
-            width: 30px;
-            height: 30px;
-            fill: var(--white);
-        }
-
-        /* Hero Section */
-                .hero {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #1e293b 100%);
-            color: var(--white);
-            padding: 10rem 5% 8rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 4rem;
-        }
-
-        .hero-text {
-            flex: 1;
-            max-width: 600px;
+        .hero .badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 100px;
+            font-size: clamp(0.75rem, 2vw, 0.85rem);
+            color: var(--accent-blue);
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+            backdrop-filter: blur(5px);
         }
 
         .hero h1 {
-            color: var(--white);
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
+            font-size: clamp(2.5rem, 10vw, 4.2rem);
             line-height: 1.1;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            color: #cbd5e1;
-        }
-
-        .hero-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-
-        .hero-image img {
+            margin-bottom: 1.2rem;
             width: 100%;
-            max-width: 500px;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            animation: float 6s ease-in-out infinite;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+        .hero h1 span {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: var(--white);
-            padding: 1rem 2.5rem;
-            text-decoration: none;
-            border-radius: 8px;
-            font-family: var(--font-heading);
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: #2563eb;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
-        }
-
-        /* Secciones Generales */
-        .section-padding {
-            padding: 6rem 5%;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .bg-white {
-            background-color: var(--white);
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: #64748b;
-            margin-bottom: 4rem;
+        
+        .hero p {
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto 2rem auto;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-        }
-
-        /* Tarjetas */
-        .card {
-            background-color: var(--white);
-            padding: 3rem 2rem;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            height: 100%;
-            border: 1px solid #f1f5f9;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
-            border-color: #e2e8f0;
-        }
-
-        .card-icon {
-            width: 60px;
-            height: 60px;
-            background-color: #eff6ff;
-            border-radius: 12px;
+        /* === BOTONES DEL HERO === */
+        .hero-actions {
             display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .btn-main, .btn-sec {
+            padding: clamp(12px, 3vw, 16px) clamp(24px, 5vw, 36px);
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .card-icon svg {
-            width: 30px;
-            height: 30px;
-            fill: var(--accent-color);
-        }
-
-        .card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Proceso de Trabajo */
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
             position: relative;
+            overflow: hidden;
         }
 
-        .process-step {
-            background: var(--white);
-            padding: 2.5rem 2rem;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            text-align: center;
+        .btn-main {
+            background: var(--accent-blue);
+            color: #000;
+            border: none;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        }
+
+        .btn-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.7);
+            background: #fff;
+        }
+
+        .btn-sec {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-sec:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+        }
+
+        /* === MOCKUP DEL TELÉFONO EN HERO (PREMIUM) === */
+        .hero-mockup-container {
+            margin-top: clamp(2rem, 8vh, 3.5rem);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            perspective: 1200px;
+        }
+
+        .phone-mockup {
+            width: clamp(200px, 60vw, 260px);
+            height: clamp(400px, 120vw, 520px);
+            background: #000;
+            border-radius: 40px;
+            border: 4px solid #1a1a24;
+            box-shadow: 
+                0 30px 60px -12px rgba(0, 0, 0, 0.9),
+                0 0 40px rgba(109, 40, 217, 0.3),
+                0 0 20px rgba(0, 240, 255, 0.2),
+                inset 0 0 10px rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+            animation: floatPhone 6s ease-in-out infinite alternate;
+            transform-style: preserve-3d;
+        }
+
+        /* Reflejo de Cristal */
+        .phone-mockup::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; right: -50%; bottom: -50%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 40%, transparent 100%);
+            transform: rotate(30deg);
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        @keyframes floatPhone {
+            0% { transform: translateY(0px) rotateX(3deg) rotateY(-3deg); }
+            100% { transform: translateY(-15px) rotateX(-2deg) rotateY(4deg); }
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35%;
+            height: 22px;
+            background: #000;
+            border-radius: 20px;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #0a0a10;
+            padding: 45px 16px 16px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            background-image: linear-gradient(to bottom, rgba(0, 240, 255, 0.05), transparent);
+        }
+
+        .mock-nav {
+            height: 14px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 8px;
+            width: 45%;
+        }
+
+        .mock-hero-card {
+            height: 140px;
+            background: var(--gradient-accent);
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mock-hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=400&auto=format&fit=crop') center/cover;
+            opacity: 0.4;
+            mix-blend-mode: overlay;
+        }
+
+        .mock-line {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 6px;
+            width: 75%;
             position: relative;
             z-index: 2;
         }
 
-        .step-number {
-            width: 50px;
-            height: 50px;
-            background-color: var(--accent-color);
-            color: var(--white);
-            font-size: 1.5rem;
-            font-family: var(--font-heading);
-            font-weight: 700;
-            border-radius: 50%;
+        .mock-line.short { width: 45%; background: var(--accent-red); }
+
+        .mock-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .mock-item {
+            height: 85px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+        }
+
+        /* === POR QUÉ ELEGIR NN (NUEVA SECCIÓN) === */
+        .why-choose-us {
+            padding: 4rem 0;
+            width: 100%;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: clamp(15px, 3vw, 25px);
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 600px) {
+            .benefits-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+        }
+
+        .benefit-card {
+            background: rgba(20, 20, 26, 0.6);
+            border: 1px solid var(--surface-border);
+            padding: 1.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+            text-align: center;
         }
 
-        .process-step h3 {
-            font-size: 1.2rem;
+        .benefit-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 20px rgba(0, 240, 255, 0.1);
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
             margin-bottom: 1rem;
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.2));
         }
 
-        .process-step p {
-            font-size: 0.95rem;
-            color: #64748b;
+        .benefit-card h4 {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .benefit-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
 
-        /* Sobre Nosotros */
-        .about {
+        /* === SERVICIOS (STICKY STACK 3D) === */
+        .services-wrapper {
+            position: relative;
+            padding: 2rem 0;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .service-card {
+            position: sticky;
+            top: 12vh;
+            background: #111118;
+            border: 1px solid var(--surface-border);
+            border-radius: 28px;
+            padding: clamp(1.5rem, 5vw, 2.5rem);
+            margin-bottom: 2rem;
+            box-shadow: 0 -15px 40px rgba(0,0,0,0.8);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+            text-align: left;
+        }
+
+        .service-card:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.9), 0 0 20px rgba(0, 240, 255, 0.1);
+        }
+        
+        .service-card:nth-child(2) { top: 14vh; background: #14141e; }
+        .service-card:nth-child(3) { top: 16vh; background: #171724; }
+        .service-card:nth-child(4) { top: 18vh; background: #1a1a2a; }
+
+        .service-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 4rem;
-        }
-
-        .about-image {
-            flex: 1;
-            position: relative;
-        }
-
-        .about-image img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        .about-text {
-            flex: 1;
-        }
-
-        .about-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-text p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Footer / Contacto */
-        footer {
-            background-color: var(--primary-color);
-            color: var(--white);
-            text-align: center;
-            padding: 6rem 5% 3rem;
-        }
-
-        footer h2 {
-            color: var(--white);
-            font-size: 2.5rem;
             margin-bottom: 1rem;
         }
 
-        footer p.contact-phrase {
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            color: #94a3b8;
-        }
-
-        /* Formulario de Contacto */
-        .contact-form-container {
-            max-width: 600px;
-            margin: 0 auto 4rem auto;
-            background-color: var(--white);
-            padding: 2.5rem;
+        .service-icon {
+            width: 48px;
+            height: 48px;
             border-radius: 16px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-            text-align: left;
-            position: relative;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-family: var(--font-body);
-            font-size: 1rem;
-            color: var(--text-color);
-            transition: border-color 0.3s ease;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background-color: var(--accent-color);
-            color: var(--white);
-            padding: 1rem;
-            border: none;
-            border-radius: 8px;
-            font-family: var(--font-heading);
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            background-color: #2563eb;
-            transform: translateY(-2px);
-        }
-
-        /* Mensaje de éxito flotante dentro del formulario */
-        .form-success-msg {
-            display: none;
-            background-color: #ecfdf5;
-            border: 1px solid #a7f3d0;
-            color: #065f46;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            font-family: var(--font-heading);
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            animation: fadeInChat 0.4s ease;
-        }
-
-        /* Botones de Redes Sociales */
-        .contact-buttons {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255,255,255,0.1);
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
+            align-items: center;
+            color: var(--accent-blue);
+            transition: transform 0.3s ease;
         }
 
-        .btn-social {
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+            border-color: var(--accent-blue);
+            background: rgba(0, 240, 255, 0.1);
+        }
+
+        .service-icon svg { width: 24px; height: 24px; fill: var(--accent-blue); }
+
+        .service-number {
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            font-weight: 800;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+            line-height: 1;
+        }
+
+        .service-card h3 { font-size: clamp(1.3rem, 5vw, 1.7rem); margin-bottom: 0.8rem; color: #fff; }
+
+        /* === PORTAFOLIO (MOCKUPS REALISTAS) === */
+        .portfolio-section {
+            padding: 4rem 0;
+            width: 100%;
+        }
+
+        .portfolio-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 1.5rem;
+            padding: 1rem clamp(15px, 5vw, 30px);
+            width: 100%;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .portfolio-slider::-webkit-scrollbar { display: none; }
+        
+        .project-card {
+            flex: 0 0 auto;
+            width: min(85vw, 380px);
+            height: clamp(380px, 60vh, 480px);
+            scroll-snap-align: center;
+            border-radius: 28px;
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: left;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 25px rgba(0, 240, 255, 0.15);
+        }
+
+        /* Imágenes de alta calidad simulando Mockups */
+        .project-card.auto { background: url('https://images.unsplash.com/photo-1503376760302-8fac1fa656b8?q=80&w=800&auto=format&fit=crop') center/cover; }
+        .project-card.pelis { background: url('https://images.unsplash.com/photo-1616469829581-73993eb86b02?q=80&w=800&auto=format&fit=crop') center/cover; }
+        .project-card.catalogo { background: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop') center/cover; }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(7, 7, 10, 0.98) 20%, rgba(7, 7, 10, 0.4) 60%, transparent 100%);
+            z-index: 1;
+        }
+
+        .project-info {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .project-info h3 { font-size: 1.8rem; color: #fff; margin-bottom: 0.3rem; }
+        .project-info p { color: #a1a1aa; font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+        .btn-project {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
-            padding: 1.2rem 2.5rem;
-            font-size: 1.1rem;
-            font-family: var(--font-heading);
-            font-weight: 700;
-            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 100px;
+            color: #fff;
             text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            min-width: 250px;
-        }
-
-        .btn-social svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--white);
-        }
-
-        .btn-whatsapp {
-            background-color: var(--whatsapp-color);
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
-        }
-
-        .btn-whatsapp:hover {
-            background-color: #20BA56;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-        }
-
-        .btn-instagram {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            box-shadow: 0 4px 15px rgba(193, 53, 132, 0.2);
-        }
-
-        .btn-instagram:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(193, 53, 132, 0.4);
-            filter: brightness(1.1);
-        }
-
-        .ig-handle {
-            margin-bottom: 4rem;
-            font-size: 1.1rem;
-            color: #cbd5e1;
-        }
-
-        .ig-handle a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 600;
-            font-family: var(--font-heading);
-            letter-spacing: 0.5px;
-            transition: color 0.3s ease;
-        }
-
-        .ig-handle a:hover {
-            color: var(--instagram-color);
-        }
-
-        .copyright {
-            margin-top: 2rem;
             font-size: 0.9rem;
-            color: #64748b;
-            border-top: 1px solid #1e293b;
-            padding-top: 2rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* ==================== CHATBOT ==================== */
-        .chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
-        .chat-toggle-btn { width: 60px; height: 60px; background-color: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); transition: transform 0.3s ease, background-color 0.3s ease; border: none; }
-        .chat-toggle-btn:hover { transform: scale(1.1); background-color: #2563eb; }
-        .chat-toggle-btn svg { width: 30px; height: 30px; fill: var(--white); }
-        .chat-window { position: fixed; bottom: 90px; right: 20px; width: 350px; height: 500px; max-height: 80vh; background-color: var(--white); border-radius: 16px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); display: flex; flex-direction: column; overflow: hidden; opacity: 0; transform: translateY(20px) scale(0.95); pointer-events: none; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); z-index: 9999; border: 1px solid #e2e8f0;}
-        .chat-window.active { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
-        .chat-header { background-color: var(--primary-color); color: var(--white); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-heading); font-weight: 600; }
-        .chat-close-btn { background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; transition: color 0.3s; }
-        .chat-close-btn:hover { color: var(--accent-color); }
-        .chat-body { flex: 1; padding: 20px; background-color: var(--chat-bg); overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-        .chat-msg { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 0.95rem; line-height: 1.4; animation: fadeInChat 0.3s ease; }
-        .chat-msg.bot { background-color: var(--bot-msg); color: var(--text-color); align-self: flex-start; border-bottom-left-radius: 4px; }
-        .chat-msg.user { background-color: var(--user-msg); color: var(--white); align-self: flex-end; border-bottom-right-radius: 4px; }
-        .chat-options { padding: 15px; background-color: var(--white); border-top: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 8px; }
-        .chat-option-btn { font-family: var(--font-body); background-color: var(--bg-light); border: 1px solid #cbd5e1; color: var(--text-color); padding: 10px 15px; border-radius: 20px; font-size: 0.9rem; text-align: left; cursor: pointer; transition: all 0.2s ease; }
-        .chat-option-btn:hover { background-color: var(--bot-msg); border-color: var(--accent-color); color: var(--primary-color); }
-        .chat-option-btn.special { background-color: var(--whatsapp-color); color: var(--white); border-color: var(--whatsapp-color); font-weight: bold; text-align: center; }
-        .chat-option-btn.special:hover { background-color: #20BA56; }
-        @keyframes fadeInChat { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .btn-project:hover { background: #fff; color: #000; border-color: #fff; }
+        .btn-project:active { transform: scale(0.95); }
+        .btn-project span { transition: transform 0.3s ease; }
+        .btn-project:hover span { transform: translateX(5px); }
 
-        /* ==================== RESPONSIVE ==================== */
-                @media (max-width: 992px) {
-            .hero { flex-direction: column; text-align: center; padding-top: 8rem; padding-bottom: 4rem; }
-            .hero-text { max-width: 100%; order: 1; }
-            .hero-image { order: 2; margin-top: 2rem; }
-            .hero h1 { font-size: 2.5rem; }
-            .about { flex-direction: column-reverse; text-align: center; }
+        /* === FORMULARIO PREMIUM (FORMSUBMIT & FLOATING LABELS) === */
+        .contact-section { padding: 4rem 0 6rem 0; width: 100%; }
+        
+        .social-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 1.2rem;
+            border-radius: 18px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
         }
 
-        @media (max-width: 768px) {
-            .section-padding { padding: 4rem 6%; }
-            .section-title { font-size: 2rem; }
-            .hamburger { display: block; }
-            nav {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background-color: rgba(15, 23, 42, 0.98);
-                backdrop-filter: blur(10px);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transition: left 0.4s ease;
-            }
-            nav.active { left: 0; }
-            nav ul { flex-direction: column; gap: 2.5rem; }
-            nav a { font-size: 1.5rem; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1.1rem; }
-            .contact-buttons { flex-direction: column; align-items: center; }
-            .btn-social { width: 100%; max-width: 350px; }
-            .contact-form-container { padding: 1.8rem; border-radius: 12px; }
-            .chat-window { width: 90vw; right: 5vw; bottom: 85px; }
-            .card { padding: 2rem 1.5rem; }
+        .btn:active { transform: scale(0.94); }
+        .btn:hover { filter: brightness(1.1); }
+        
+        .btn-wa { background: #25D366; }
+        .btn-ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .btn-email { 
+            grid-column: 1 / -1; 
+            background: rgba(255,255,255,0.05); 
+            border: 1px solid var(--surface-border); 
+            backdrop-filter: blur(10px);
         }
+
+        .custom-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            width: 100%;
+            max-width: 500px;
+            background: rgba(15, 15, 20, 0.6);
+            padding: clamp(1.5rem, 5vw, 2.5rem);
+            border-radius: 24px;
+            border: 1px solid var(--surface-border);
+            backdrop-filter: blur(10px);
+            text-align: left;
+        }
+
+        .input-group { position: relative; width: 100%; }
+
+        .input-group input, .input-group textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            padding: 1.2rem 0 0.5rem 0;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .input-group textarea { resize: none; height: 100px; }
+        
+        .input-group label {
+            position: absolute;
+            top: 1.2rem;
+            left: 0;
+            color: var(--text-muted);
+            font-size: 1rem;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        /* Animación Floating Label */
+        .input-group input:focus ~ label,
+        .input-group input:not(:placeholder-shown) ~ label,
+        .input-group textarea:focus ~ label,
+        .input-group textarea:not(:placeholder-shown) ~ label {
+            top: -0.2rem;
+            font-size: 0.8rem;
+            color: var(--accent-blue);
+        }
+
+        .input-group input:focus, .input-group textarea:focus { 
+            border-bottom-color: var(--accent-blue);
+        }
+        
+        .btn-submit {
+            position: relative;
+            overflow: hidden;
+            background: var(--gradient-accent);
+            color: #fff;
+            border: none;
+            padding: 1.2rem;
+            border-radius: 100px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-top: 1rem;
+            cursor: pointer;
+            box-shadow: 0 10px 25px var(--glow-purple), 0 0 15px var(--glow-blue);
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+        }
+
+        .btn-submit:active { transform: scale(0.96); }
+        .btn-submit:hover { box-shadow: 0 15px 35px var(--glow-purple), 0 0 25px var(--glow-blue); }
+
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: rippleEffect 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes rippleEffect { to { transform: scale(4); opacity: 0; } }
+
+        /* === NOTIFICACIÓN VISUAL (REEMPLAZA ALERT) === */
+        .visual-alert {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translate(-50%, -100px);
+            background: rgba(10, 10, 15, 0.95);
+            border: 1px solid var(--accent-blue);
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            z-index: 10000;
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .visual-alert.show {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
+        
+        .visual-alert.error { border-color: var(--accent-red); box-shadow: 0 10px 30px rgba(255, 0, 60, 0.2); }
+
+        /* === CHATBOT TIPO APP PREMIUM === */
+        .chat-drawer {
+            position: fixed;
+            bottom: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(100%, 600px);
+            height: clamp(60vh, 85vh, 800px);
+            background: #0a0a0e;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            z-index: 1000;
+            transition: bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 -20px 60px rgba(0,0,0,0.9);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-bottom: none;
+        }
+
+        .chat-drawer.open { bottom: 0; }
+        
+        .chat-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--surface-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 14, 0.9);
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+        }
+
+        .chat-header h3 { font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+        
+        /* Avatar NN */
+        .avatar-nn {
+            width: 32px; height: 32px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 0.8rem; font-weight: 800; color: #fff;
+            box-shadow: 0 0 10px var(--glow-blue);
+        }
+        .close-chat { background: none; border: none; color: #fff; font-size: 1.8rem; cursor: pointer; transition: transform 0.2s; }
+        .close-chat:active { transform: scale(0.8); }
+        
+        .chat-body {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            scroll-behavior: smooth;
+        }
+        
+        .message {
+            max-width: 85%;
+            padding: 1rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            animation: messageIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(15px) scale(0.95);
+        }
+
+        @keyframes messageIn { to { opacity: 1; transform: translateY(0) scale(1); } }
+        
+        .msg-bot {
+            background: var(--surface-color);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+            border: 1px solid var(--surface-border);
+            position: relative;
+        }
+
+        .msg-user {
+            background: var(--accent-blue);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+            color: #000;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
+        }
+
+        /* Indicador de Escritura */
+        .typing-indicator {
+            display: flex; align-items: center; gap: 10px;
+            align-self: flex-start;
+            background: transparent;
+            padding: 0.5rem 1rem;
+            display: none;
+        }
+        
+        .typing-indicator.active { display: flex; animation: messageIn 0.3s forwards; }
+
+        .typing-dots { display: flex; gap: 4px; }
+        .typing-dots span {
+            width: 6px; height: 6px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+        
+        .chat-options {
+            padding: 1rem 1.5rem calc(1rem + var(--safe-bottom));
+            border-top: 1px solid var(--surface-border);
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            background: rgba(10, 10, 14, 0.95);
+        }
+
+        .chat-option-btn {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-main);
+            padding: 1rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .chat-option-btn:active { 
+            background: var(--accent-blue);
+            color: #000;
+            transform: scale(0.98);
+        }
+        
+        .chat-cta {
+            background: #fff;
+            color: #000;
+            text-align: center;
+            font-weight: 700;
+            border: none;
+            display: none;
+            box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+        }
+        
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
+
+        .overlay.active { opacity: 1; pointer-events: all; }
     </style>
 </head>
 <body>
 
-    <!-- Cabecera y Navegación -->
-    <header id="main-header">
-        <div class="logo-container">
-            <div class="logo">NN <span>WEB STUDIO</span></div>
-            <div class="tagline">Desarrollo Web para Negocios</div>
+    <!-- SISTEMA DE PARTÍCULAS -->
+    <div class="particles-bg" id="particles"></div>
+
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-title">NN</div>
+            <div class="preloader-sub">WEB STUDIO</div>
         </div>
-        
-        <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú">
-            <svg viewBox="0 0 24 24">
-                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-            </svg>
-        </button>
-
-        <nav id="nav-menu">
-            <ul>
-                <li><a href="#inicio" class="nav-link">Inicio</a></li>
-                <li><a href="#servicios" class="nav-link">Servicios</a></li>
-                <li><a href="#beneficios" class="nav-link">Beneficios</a></li>
-                <li><a href="#proceso" class="nav-link">Proceso</a></li>
-                <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
-                <li><a href="#contacto" class="nav-link">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Sección Hero -->
-    <section id="inicio" class="hero fade-in-up">
-        <div class="hero-text">
-            <h1>Creamos páginas web para hacer crecer tu negocio</h1>
-            <p>Atrae más clientes y aumenta tus ventas con un sitio web profesional, rápido y diseñado estratégicamente para emprendedores y negocios que buscan resultados reales.</p>
-            <a href="#contacto" class="btn">Solicita Información</a>
-        </div>
-        <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Diseño web profesional">
-        </div>
-    </section>
-
-    <!-- Sección de Servicios -->
-    <section id="servicios" class="section-padding text-center bg-white">
-        <h2 class="section-title fade-in-up">Nuestras Soluciones</h2>
-        <p class="section-subtitle fade-in-up">Desarrollamos herramientas digitales que se adaptan a las necesidades específicas de tu empresa.</p>
-        
-        <div class="grid">
-            <div class="card fade-in-up">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/></svg>
-                </div>
-                <h3>Páginas Web</h3>
-                <p>Sitios web profesionales, rápidos y adaptados a cualquier dispositivo móvil. Diseñados para presentar tu marca de forma impecable.</p>
-            </div>
-            <div class="card fade-in-up">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24"><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12zm-7-8c-1.66 0-3-1.34-3-3H7c0 2.76 2.24 5 5 5s5-2.24 5-5h-2c0 1.66-1.34 3-3 3z"/></svg>
-                </div>
-                <h3>Catálogos para Tiendas</h3>
-                <p>Muestra tus productos de forma atractiva. Creamos catálogos digitales dinámicos e intuitivos, ideales para optimizar tus pedidos.</p>
-            </div>
-            <div class="card fade-in-up">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
-                </div>
-                <h3>Plataformas a Medida</h3>
-                <p>Desarrollamos herramientas web personalizadas. Nos adaptamos a ti para crear la solución exacta que requieres para tu logística interna.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Beneficios -->
-    <section id="beneficios" class="section-padding text-center">
-        <h2 class="section-title fade-in-up">¿Por qué tener una página web?</h2>
-        <p class="section-subtitle fade-in-up">Da el salto al mundo digital y disfruta de ventajas exclusivas para tu negocio.</p>
-        <div class="grid">
-            <div class="card fade-in-up">
-                <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg></div>
-                <h3>Disponibilidad Continua</h3>
-                <p>Tu negocio abierto y disponible para tus clientes las 24 horas del día, los 7 días de la semana.</p>
-            </div>
-            <div class="card fade-in-up">
-                <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
-                <h3>Imagen Corporativa</h3>
-                <p>Genera más confianza, profesionalismo y credibilidad ante nuevos clientes potenciales.</p>
-            </div>
-            <div class="card fade-in-up">
-                <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 9h-2V7h-2v5H6v-2h2V7c0-1.1.9-2 2-2h2v7zm4 4h-6v2h6v-2zm0-4h-6v2h6v-2z"/></svg></div>
-                <h3>Gestión Eficiente</h3>
-                <p>Muestra tus productos, servicios y preguntas frecuentes de forma centralizada y automatizada.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Proceso de Trabajo -->
-    <section id="proceso" class="section-padding bg-white text-center">
-        <h2 class="section-title fade-in-up">Nuestro Proceso de Trabajo</h2>
-        <p class="section-subtitle fade-in-up">4 pasos simples para llevar tu negocio al siguiente nivel digital sin complicaciones.</p>
-        
-        <div class="process-grid fade-in-up">
-            <div class="process-step">
-                <div class="step-number">1</div>
-                <h3>Contacto y Diagnóstico</h3>
-                <p>Hablamos sobre tu negocio, tus metas y lo que necesitas lograr con tu nueva página web.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-number">2</div>
-                <h3>Propuesta y Diseño</h3>
-                <p>Te presentamos una estructura visual (boceto) para asegurar que el estilo encaje con tu marca.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-number">3</div>
-                <h3>Desarrollo Web</h3>
-                <p>Escribimos el código y programamos tu sitio para que sea rápido, seguro y adaptable a celulares.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-number">4</div>
-                <h3>¡Lanzamiento!</h3>
-                <p>Publicamos tu página web y te entregamos tu proyecto listo para empezar a recibir clientes.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Sobre Nosotros -->
-    <section id="nosotros" class="section-padding about">
-        <div class="about-text fade-in-up">
-            <h2>¿Qué es NN Web Studio?</h2>
-            <p>Creamos soluciones digitales diseñadas para que tu negocio crezca y tenga presencia en internet. En NN Web Studio transformamos ideas en páginas web modernas, funcionales y pensadas para conectar con tus clientes.
-</p>
-            <p>Trabajamos de la mano contigo para entender tus objetivos comerciales, brindándote un trato cercano, transparente y profesional. Nos enfocamos en entregar interfaces limpias, código bien estructurado y diseños modernos que se ven increíbles en cualquier dispositivo.</p>
-        </div>
-        <div class="about-image fade-in-up">
-            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Equipo NN Web Studio">
-        </div>
-    </section>
-
-    <!-- Pie de página / Contacto -->
-    <footer id="contacto">
-        <h2 class="fade-in-up">¿Listo para impulsar tu negocio?</h2>
-        <p class="contact-phrase fade-in-up">Déjanos un mensaje o contáctanos por redes sociales.</p>
-        
-        <!-- Formulario de Contacto con AJAX (SIN REDIRECCIÓN VISUAL) -->
-        <div class="contact-form-container fade-in-up">
-            <!-- Mensaje de éxito flotante -->
-            <div id="formSuccessMessage" class="form-success-msg">
-                ¡Gracias! Tu mensaje ha sido enviado con éxito. Nos pondremos en contacto contigo muy pronto.
-            </div>
-
-            <form id="contactForm" action="https://formsubmit.co/ajax/studionnweb@gmail.com" method="POST">
-                <!-- Configuración de FormSubmit para AJAX -->
-                <input type="hidden" name="_subject" value="¡Nuevo prospecto desde la web de NN Web Studio!">
-                <input type="hidden" name="_captcha" value="false">
-                
-                <div class="form-group">
-                    <label for="name">Nombre o Empresa</label>
-                    <input type="text" id="name" name="name" class="form-control" placeholder="Ej. Juan Pérez" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Correo Electrónico</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="tu@correo.com" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Teléfono / WhatsApp</label>
-                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="Ej. 644 123 4567" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="service">Servicio de interés</label>
-                    <select id="service" name="service" class="form-control" required>
-                        <option value="" disabled selected>Selecciona una opción</option>
-                        <option value="Página Web Corporativa">Página Web</option>
-                        <option value="Catálogo Digital">Catálogo Digital</option>
-                                                <option value="Aún no estoy seguro">Aún no estoy seguro, necesito asesoría</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Cuéntanos sobre tu proyecto</label>
-                    <textarea id="message" name="message" class="form-control" placeholder="¿Qué necesitas que haga tu página web?" required></textarea>
-                </div>
-                
-                <button type="submit" id="submitBtn" class="btn-submit">Enviar Mensaje</button>
-            </form>
-        </div>
-
-        <p class="contact-phrase fade-in-up" style="margin-top: 2rem; margin-bottom: 1.5rem; font-size: 1rem;">O escríbenos directamente a través de:</p>
-
-        <div class="contact-buttons fade-in-up">
-            <a href="https://wa.me/526442252598?text=Hola,%20me%20interesa%20una%20p%C3%A1gina%20web%20para%20mi%20negocio" target="_blank" rel="noopener noreferrer" class="btn-social btn-whatsapp">
-                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                WhatsApp
-            </a>
-            <a href="https://instagram.com/nnweb_studio" target="_blank" rel="noopener noreferrer" class="btn-social btn-instagram">
-                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                Instagram
-            </a>
-        </div>
-        
-        <div class="ig-handle fade-in-up">
-            <p>Síguenos en Instagram: <a href="https://instagram.com/nnweb_studio" target="_blank">@nnweb_studio</a></p>
-        </div>
-
-        <p class="copyright">&copy; <span id="year"></span> NN Web Studio. Todos los derechos reservados.</p>
-    </footer>
-
-    <!-- ==================== WIDGET CHATBOT ==================== -->
-    <div class="chat-widget">
-        <div class="chat-window" id="chatWindow">
-            <div class="chat-header">
-                <span>Asistente NN</span>
-                <button class="chat-close-btn" id="closeChatBtn">&times;</button>
-            </div>
-            
-            <div class="chat-body" id="chatBody">
-                <div class="chat-msg bot">¡Hola! Soy el asistente de NN Web Studio. ¿En qué puedo ayudarte hoy?</div>
-            </div>
-
-                        <div class="chat-options" id="chatOptions">
-                <button class="chat-option-btn" onclick="handleOptionClick('¿Cuánto cuesta una página web?')">¿Cuánto cuesta una página web?</button>
-                <button class="chat-option-btn" onclick="handleOptionClick('¿Qué servicios ofrecen?')">¿Qué servicios ofrecen?</button>
-                <button class="chat-option-btn" onclick="handleOptionClick('¿Cuánto tarda una página web?')">¿Cuánto tarda una página web?</button>
-                <button class="chat-option-btn special" onclick="openWhatsApp()">Contactanos</button>
-            </div>
-        </div>
-
-        <button class="chat-toggle-btn" id="openChatBtn" aria-label="Abrir Chat">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z"/>
-                <path d="M7 9H17V11H7V9Z"/>
-                <path d="M7 12H14V14H7V12Z"/>
-            </svg>
-        </button>
     </div>
 
-        <!-- ==================== SCRIPTS ==================== -->
+    <!-- NOTIFICACIÓN VISUAL CUSTOM (Reemplaza a los alerts) -->
+    <div id="visualAlert" class="visual-alert">
+        <span id="alertIcon">✅</span>
+        <span id="alertText">Mensaje enviado.</span>
+    </div>
+
+    <!-- NAVEGACIÓN INFERIOR (APP STYLE) -->
+    <nav class="bottom-nav">
+        <a href="#inicio" class="nav-item active" data-section="inicio">
+            <svg viewBox="0 0 24 24"><path d="M12 3l8 6v12h-5v-7h-6v7H4V9z"/></svg>
+            Inicio
+        </a>
+        <a href="#servicios" class="nav-item" data-section="servicios">
+            <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+            Servicios
+        </a>
+        <button class="nav-fab" onclick="toggleChat()" aria-label="Abrir Asistente">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/></svg>
+        </button>
+        <a href="#portafolio" class="nav-item" data-section="portafolio">
+            <svg viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
+            Proyectos
+        </a>
+        <a href="#contacto" class="nav-item" data-section="contacto">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            Contacto
+        </a>
+    </nav>
+
+    <!-- INICIO (HERO) -->
+    <section id="inicio" class="hero container">
+        <div class="hero-blob"></div>
+        <div class="reveal">
+            <span class="badge">NN Web Studio</span>
+            <h1>Digital.<br><span>Único.</span><br>Premium.</h1>
+            <p>No hacemos simples páginas. Creamos arquitecturas digitales, catálogos interactivos y soluciones web que elevan tu negocio al estándar de las mejores aplicaciones móviles.</p>
+            
+            <div class="hero-actions">
+                <a href="#contacto" class="btn-main">Quiero mi página web</a>
+                <a href="#portafolio" class="btn-sec">Ver proyectos</a>
+            </div>
+        </div>
+
+        <!-- MOCKUP MÓVIL (REALISTA Y PARALLAX) -->
+        <div class="hero-mockup-container reveal">
+            <div class="phone-mockup">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                    <div class="mock-nav"></div>
+                    <div class="mock-hero-card">
+                        <div class="mock-line"></div>
+                        <div class="mock-line short"></div>
+                    </div>
+                    <div class="mock-grid">
+                        <div class="mock-item"></div>
+                        <div class="mock-item"></div>
+                        <div class="mock-item"></div>
+                        <div class="mock-item"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUEVA SECCIÓN: POR QUÉ ELEGIRNOS -->
+    <section class="why-choose-us container reveal">
+        <h2 class="section-title">¿Por qué elegir NN?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">⚡</div>
+                <h4>Código Limpio</h4>
+                <p>Vanilla JS nativo. Cero frameworks pesados. Máximo rendimiento y fluidez.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">📱</div>
+                <h4>Mobile First</h4>
+                <p>Interfaces milimétricamente centradas y pensadas para usarse con una mano.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🎨</div>
+                <h4>Diseño Único</h4>
+                <p>Identidad oscura, minimalista, con detalles premium. Adiós a las plantillas aburridas.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🚀</div>
+                <h4>Optimización</h4>
+                <p>Carga instantánea. Experiencia de usuario (UX) al nivel de las apps top.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="container reveal">
+        <h2 class="section-title">Qué hacemos</h2>
+        <div class="services-wrapper">
+            
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    </div>
+                    <div class="service-number">01</div>
+                </div>
+                <h3>Páginas Web Nativas</h3>
+                <p>Diseño sin plantillas. Interfaces creadas desde cero, optimizadas a nivel de código para cargar rápido y sentirse como una app.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                    </div>
+                    <div class="service-number">02</div>
+                </div>
+                <h3>Catálogos Digitales</h3>
+                <p>Muestra tus productos con un diseño elegante y fácil de navegar con una mano. Perfecto para compartir por WhatsApp.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+                    </div>
+                    <div class="service-number">03</div>
+                </div>
+                <h3>Soluciones Mobile-First</h3>
+                <p>Más del 80% de tus clientes te verán desde su celular. Nuestras interfaces nacen pensadas para pantallas móviles y escalan a tablets o PCs.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+                    </div>
+                    <div class="service-number">04</div>
+                </div>
+                <h3>Diseño Personalizado</h3>
+                <p>Desarrollo a la medida de tu identidad visual. Transmitimos la confianza y profesionalismo que tu marca requiere en internet.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PORTAFOLIO (MOCKUPS) -->
+    <section id="portafolio" class="portfolio-section reveal">
+        <div class="container">
+            <h2 class="section-title">Proyectos</h2>
+        </div>
+        <div class="portfolio-slider">
+            <div class="project-card auto">
+                <div class="project-info">
+                    <h3>AutoLux Motors</h3>
+                    <p>Showroom Digital de Vehículos Premium</p>
+                    <a href="#contacto" class="btn-project">Ver sitio <span>→</span></a>
+                </div>
+            </div>
+            <div class="project-card pelis">
+                <div class="project-info">
+                    <h3>Galería Pelisjuan</h3>
+                    <p>Plataforma de Streaming Web Personalizada</p>
+                    <a href="#contacto" class="btn-project">Ver sitio <span>→</span></a>
+                </div>
+            </div>
+            <div class="project-card catalogo">
+                <div class="project-info">
+                    <h3>Catálogo Comercial</h3>
+                    <p>E-commerce UI/UX para emprendedores</p>
+                    <a href="#contacto" class="btn-project">Ver sitio <span>→</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO & FORMULARIO (FORMSUBMIT API DIRECTA) -->
+    <section id="contacto" class="container contact-section reveal">
+        <h2 class="section-title">Inicia tu proyecto</h2>
+        
+        <div class="social-buttons">
+            <a href="https://wa.me/526442252598?text=Hola,%20me%20interesa%20una%20p%C3%A1gina%20web%20para%20mi%20negocio" target="_blank" class="btn btn-wa">WhatsApp</a>
+            <a href="https://www.instagram.com/nnweb_studio" target="_blank" class="btn btn-ig">Instagram</a>
+            <a href="mailto:studionnweb@gmail.com" class="btn btn-email">studionnweb@gmail.com</a>
+        </div>
+
+        <form class="custom-form" id="contactForm">
+            <div class="input-group">
+                <input type="text" id="nombre" name="nombre" placeholder=" " required>
+                <label>Tu Nombre</label>
+            </div>
+            <div class="input-group">
+                <input type="tel" id="telefono" name="telefono" placeholder=" " required>
+                <label>Número de Teléfono</label>
+            </div>
+            <div class="input-group">
+                <input type="email" id="correo" name="correo" placeholder=" " required>
+                <label>Correo Electrónico</label>
+            </div>
+            <div class="input-group">
+                <textarea id="mensaje" name="mensaje" placeholder=" " required></textarea>
+                <label>Cuéntanos qué necesitas...</label>
+            </div>
+            <button type="submit" class="btn-submit">Enviar Mensaje</button>
+        </form>
+    </section>
+
+    <!-- OVERLAY & CHATBOT DRAWER PREMIUM -->
+    <div class="overlay" id="chatOverlay" onclick="toggleChat()"></div>
+    <div class="chat-drawer" id="chatDrawer">
+        <div class="chat-header">
+            <h3><div class="avatar-nn">NN</div> Asistente</h3>
+            <button class="close-chat" onclick="toggleChat()">&times;</button>
+        </div>
+        
+        <div class="chat-body" id="chatBody">
+            <div class="message msg-bot">Hola 👋 Bienvenido a NN Web Studio. ¿En qué te puedo ayudar hoy?</div>
+            
+            <div class="typing-indicator" id="typingIndicator">
+                <span style="color: var(--text-muted); font-size: 0.85rem;">NN está escribiendo</span>
+                <div class="typing-dots"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+        
+        <div class="chat-options" id="chatOptions">
+            <button class="chat-option-btn" onclick="sendMsg('¿Cuánto cuesta una página web?', this)">💰 ¿Cuánto cuesta una página web?</button>
+            <button class="chat-option-btn" onclick="sendMsg('¿Qué servicios ofrecen?', this)">🛠️ ¿Qué servicios ofrecen?</button>
+            <button class="chat-option-btn" onclick="sendMsg('¿Cuánto tarda una página web?', this)">⏱️ ¿Cuánto tarda en estar lista?</button>
+            
+            <a href="https://wa.me/526442252598?text=Hola,%20me%20interesa%20una%20p%C3%A1gina%20web%20para%20mi%20negocio" target="_blank" class="chat-option-btn chat-cta" id="chatCta" style="display:none; text-decoration:none;">
+                Hablar con un humano (WhatsApp)
+            </a>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
     <script>
-        /* --- 1. SIEMPRE AL INICIO AL CARGAR --- */
-        window.onbeforeunload = function () {
-            window.scrollTo(0, 0);
-        };
-        if ('scrollRestoration' in history) {
-            history.scrollRestoration = 'manual';
+        // 1. GENERADOR DE PARTÍCULAS SUTILES
+        const particlesContainer = document.getElementById('particles');
+        for(let i = 0; i < 20; i++) {
+            let p = document.createElement('div');
+            p.classList.add('particle');
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.width = Math.random() * 3 + 1 + 'px';
+            p.style.height = p.style.width;
+            p.style.animationDuration = Math.random() * 10 + 10 + 's';
+            p.style.animationDelay = Math.random() * 5 + 's';
+            particlesContainer.appendChild(p);
         }
+
+        // 2. PRELOADER
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                window.scrollTo({top: 0, behavior: 'instant'});
-            }, 0);
+            setTimeout(() => document.getElementById('preloader').classList.add('hidden'), 800);
         });
 
-        /* --- 2. LÓGICA DE NAVEGACIÓN Y HEADER --- */
-        const hamburgerBtn = document.getElementById('hamburgerBtn');
-        const navMenu = document.getElementById('nav-menu');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        hamburgerBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
+        // 3. ANIMACIONES SCROLL
+        const revealOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
             });
-        });
+        }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
 
-        const header = document.getElementById('main-header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+        document.querySelectorAll('.reveal').forEach(el => revealOnScroll.observe(el));
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+        // 4. ACTIVE STATE EN BOTTOM NAV
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.nav-item').forEach(item => {
+                        item.classList.toggle('active', item.getAttribute('data-section') === entry.target.id);
                     });
                 }
             });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('section').forEach(sec => navObserver.observe(sec));
+
+        // 5. RIPPLE EFFECT BOTONES
+        document.querySelectorAll('.btn-submit, .btn-main').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const rect = this.getBoundingClientRect();
+                const circle = document.createElement('span');
+                circle.classList.add('ripple');
+                circle.style.left = `${e.clientX - rect.left}px`;
+                circle.style.top = `${e.clientY - rect.top}px`;
+                this.appendChild(circle);
+                setTimeout(() => circle.remove(), 600);
+            });
         });
 
-        /* --- 3. ANIMACIONES AL HACER SCROLL --- */
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
+        // 6. CHATBOT CON SIMULADOR DE ESCRITURA
+        const botAnswers = {
+            "¿Cuánto cuesta una página web?": "El precio depende del tipo de página y las funciones que necesites. Creamos arquitecturas limpias y personalizadas. Contáctanos para enviarte una cotización sin compromiso.",
+            "¿Qué servicios ofrecen?": "Nos especializamos en desarrollo nativo web (HTML/CSS/JS puros), sin plantillas, catálogos digitales interactivos y experiencias Mobile-First al nivel de una App móvil.",
+            "¿Cuánto tarda una página web?": "Depende de la complejidad. Los catálogos y sitios corporativos suelen estar listos en pocos días tras definir el diseño base con nuestra identidad."
         };
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); 
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in-up').forEach(element => {
-            observer.observe(element);
-        });
-
-        /* --- 4. ENVÍO DE FORMULARIO POR AJAX (SIN SALIR DE LA PÁGINA) --- */
-        const contactForm = document.getElementById('contactForm');
-        const successMessage = document.getElementById('formSuccessMessage');
-        const submitBtn = document.getElementById('submitBtn');
-
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            submitBtn.textContent = "Enviando...";
-            submitBtn.disabled = true;
-
-            const formData = new FormData(contactForm);
-
-            fetch(contactForm.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    contactForm.reset();
-                    contactForm.style.display = 'none'; // Oculta el formulario
-                    successMessage.style.display = 'block'; // Muestra el mensaje de éxito bonito
-                } else {
-                    alert('Hubo un problema al enviar el mensaje. Inténtalo de nuevo.');
-                    submitBtn.textContent = "Enviar Mensaje";
-                    submitBtn.disabled = false;
-                }
-            }).catch(error => {
-                alert('Error de conexión. Verifica tu internet e inténtalo de nuevo.');
-                submitBtn.textContent = "Enviar Mensaje";
-                submitBtn.disabled = false;
-            });
-        });
-
-        /* --- 5. LÓGICA DEL CHATBOT --- */
-        const chatWindow = document.getElementById('chatWindow');
-        const openChatBtn = document.getElementById('openChatBtn');
-        const closeChatBtn = document.getElementById('closeChatBtn');
+        const chatDrawer = document.getElementById('chatDrawer');
+        const chatOverlay = document.getElementById('chatOverlay');
         const chatBody = document.getElementById('chatBody');
-        const chatOptions = document.getElementById('chatOptions');
+        const typingIndicator = document.getElementById('typingIndicator');
 
-                const faqDatabase = {
-            "¿Cuánto cuesta una página web?": "Nuestros sitios web tienen un precio inicial desde $200 MXN. El costo puede variar dependiendo de las funciones que necesite tu negocio. Escríbenos por WhatsApp y te ayudamos a crear la mejor opción para ti.",
-            "¿Qué servicios ofrecen?": "Creamos páginas web corporativas, catálogos digitales para tiendas y desarrollamos plataformas web a la medida de tu negocio.",
-            "¿Cuánto tarda una página web?": "El tiempo de entrega depende del tamaño del proyecto, pero la mayoría de las páginas web se completan entre 1 a 3 dias.",
-            "¿Cómo puedo contactarlos?": "Puedes escribirnos por WhatsApp, usar el formulario de contacto de la página, o mandarnos un DM en Instagram."
-        };
+        function toggleChat() {
+            chatDrawer.classList.toggle('open');
+            chatOverlay.classList.toggle('active');
+        }
 
-        openChatBtn.addEventListener('click', () => chatWindow.classList.add('active'));
-        closeChatBtn.addEventListener('click', () => chatWindow.classList.remove('active'));
+        function sendMsg(question, btnElement) {
+            btnElement.style.display = 'none';
 
-        function appendMessage(text, sender) {
-            const msgElement = document.createElement('div');
-            msgElement.classList.add('chat-msg', sender);
-            msgElement.textContent = text;
-            chatBody.appendChild(msgElement);
+            // Insertar msj usuario
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message msg-user';
+            userMsg.textContent = question;
+            chatBody.insertBefore(userMsg, typingIndicator);
+            scrollToBottom();
+
+            // Mostrar escribiendo...
+            typingIndicator.classList.add('active');
+            scrollToBottom();
+
+            setTimeout(() => {
+                typingIndicator.classList.remove('active');
+                
+                const botMsg = document.createElement('div');
+                botMsg.className = 'message msg-bot';
+                botMsg.textContent = botAnswers[question];
+                chatBody.insertBefore(botMsg, typingIndicator);
+                
+                document.getElementById('chatCta').style.display = 'block';
+                scrollToBottom();
+            }, 1800);
+        }
+
+        function scrollToBottom() {
             chatBody.scrollTop = chatBody.scrollHeight;
         }
 
-        function handleOptionClick(question) {
-            appendMessage(question, 'user');
-            chatOptions.style.pointerEvents = 'none';
-            chatOptions.style.opacity = '0.7';
+        // 7. ENVÍO DE FORMULARIO DIRECTO (Fetch) Y NOTIFICACIÓN VISUAL
+        function showVisualAlert(msg, isError = false) {
+            const alertBox = document.getElementById('visualAlert');
+            document.getElementById('alertText').textContent = msg;
+            document.getElementById('alertIcon').textContent = isError ? '❌' : '✅';
+            
+            if(isError) alertBox.classList.add('error');
+            else alertBox.classList.remove('error');
 
-            setTimeout(() => {
-                const answer = faqDatabase[question] || "Gracias por tu mensaje. Un asesor te responderá pronto.";
-                appendMessage(answer, 'bot');
-                chatOptions.style.pointerEvents = 'all';
-                chatOptions.style.opacity = '1';
-            }, 600);
+            alertBox.classList.add('show');
+            setTimeout(() => alertBox.classList.remove('show'), 3500);
         }
 
-        function openWhatsApp() {
-            const whatsappUrl = "https://wa.me/526442252598?text=Hola,%20me%20interesa%20una%20p%C3%A1gina%20web%20para%20mi%20negocio";
-            window.open(whatsappUrl, '_blank');
-        }
-        document.getElementById("year").textContent = new Date().getFullYear();
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('.btn-submit');
+            btn.textContent = 'Enviando...';
+            btn.style.pointerEvents = 'none';
+            btn.style.opacity = '0.7';
+
+            const formData = new FormData(this);
+
+            fetch('https://formsubmit.co/ajax/studionnweb@gmail.com', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                showVisualAlert('¡Mensaje enviado correctamente! Nos pondremos en contacto pronto.');
+                this.reset();
+                btn.textContent = 'Enviar Mensaje';
+                btn.style.pointerEvents = 'auto';
+                btn.style.opacity = '1';
+            })
+            .catch(error => {
+                showVisualAlert('Hubo un error. Intenta enviarnos un WhatsApp.', true);
+                btn.textContent = 'Enviar Mensaje';
+                btn.style.pointerEvents = 'auto';
+                btn.style.opacity = '1';
+            });
+        });
     </script>
 </body>
 </html>
