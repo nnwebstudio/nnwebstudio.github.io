@@ -166,7 +166,7 @@
             transform: translateY(0) scale(1);
         }
 
-        /* === APP NAV BAR (BOTTOM) === */
+        /* === APP NAV BAR === */
         .bottom-nav {
             position: fixed;
             bottom: clamp(10px, 2vh, 20px);
@@ -184,6 +184,11 @@
             align-items: center;
             z-index: 100;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 240, 255, 0.1);
+            transition: all 0.4s var(--ease-apple);
+        }
+        
+        .nav-desktop-logo {
+            display: none;
         }
 
         .nav-item {
@@ -228,7 +233,7 @@
             color: #fff;
             border: none;
             cursor: pointer;
-            transition: transform 0.4s var(--ease-bounce), box-shadow 0.3s ease;
+            transition: transform 0.4s var(--ease-bounce), box-shadow 0.3s ease, padding 0.3s, border-radius 0.3s;
         }
 
         .nav-fab:active { transform: translateY(-12px) scale(0.92); }
@@ -286,6 +291,12 @@
             padding-top: clamp(4rem, 15vh, 6rem);
             padding-bottom: 2rem;
             z-index: 1;
+        }
+        
+        .hero-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
         }
 
         .hero header {
@@ -460,11 +471,11 @@
 
         /* === SERVICIOS === */
         .services-wrapper {
-    position: relative;
-    padding: 5rem 0 2rem;
-    width: 100%;
-    max-width: 700px;
-}
+            position: relative;
+            padding: 5rem 0 2rem;
+            width: 100%;
+            max-width: 700px;
+        }
         
         .service-card {
             position: sticky;
@@ -487,8 +498,8 @@
         }
         
         .service-card:nth-child(2) { top: 24vh; background: #13131a; }
-.service-card:nth-child(3) { top: 26vh; background: #16161e; }
-.service-card:nth-child(4) { top: 28vh; background: #191922; }
+        .service-card:nth-child(3) { top: 26vh; background: #16161e; }
+        .service-card:nth-child(4) { top: 28vh; background: #191922; }
 
         .service-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
         .service-icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: center; align-items: center; color: var(--accent-blue); transition: all 0.4s var(--ease-bounce); }
@@ -677,6 +688,13 @@
         /* === FORMULARIO === */
         .contact-section { padding: 4rem 0 6rem 0; width: 100%; }
         
+        .contact-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+        }
+
         .social-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 3rem; width: 100%; max-width: 550px; }
         .btn { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 1.2rem; border-radius: 20px; text-decoration: none; color: #fff; font-weight: 600; font-size: 0.95rem; transition: transform 0.2s var(--ease-bounce), filter 0.3s ease; }
         .btn:active { transform: scale(0.94); }
@@ -777,9 +795,183 @@
             font-size: 0.85rem;
             margin-top: 1rem;
         }
-         #servicios {
-    scroll-margin-top: 100px;
-}
+        #servicios {
+            scroll-margin-top: 100px;
+        }
+
+
+        /* =========================================================
+           ADAPTACIONES RESPONSIVE (TABLET & DESKTOP) 
+           ========================================================= */
+
+        /* 📱 TABLET (768px+) */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 1200px;
+            }
+            .process-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .process-grid::before { 
+                display: none; /* Simplificamos línea en tablet */
+            }
+            .services-wrapper { max-width: 90%; }
+            .hero-actions { justify-content: center; }
+            .contact-wrapper {
+                max-width: 80%;
+            }
+        }
+
+        /* 🖥️ ESCRITORIO (1024px+) */
+        @media (min-width: 1024px) {
+            /* Reset del padding inferior del navbar móvil */
+            body {
+                padding-bottom: 0;
+            }
+            
+            /* Navbar Superior Minimalista */
+            .bottom-nav {
+                top: 0;
+                bottom: auto;
+                width: 100%;
+                height: 80px;
+                border-radius: 0;
+                border: none;
+                border-bottom: 1px solid var(--surface-border);
+                justify-content: flex-end;
+                gap: 2.5rem;
+                padding: 0 5%;
+                background: rgba(7, 7, 10, 0.85);
+            }
+            
+            .nav-desktop-logo {
+                display: flex;
+                margin-right: auto;
+            }
+            
+            .nav-item {
+                flex-direction: row;
+                gap: 10px;
+                font-size: 0.95rem;
+                padding: 10px 15px;
+            }
+            
+            .nav-item svg { margin-bottom: 0; width: 18px; height: 18px; }
+            
+            .nav-fab {
+                transform: none !important;
+                width: auto;
+                height: 45px;
+                border-radius: 100px;
+                padding: 0 24px;
+                font-size: 0.95rem;
+                font-weight: 600;
+                gap: 8px;
+            }
+            
+            /* Convertimos el icono en texto para escritorio manteniendo la estética */
+            .nav-fab svg { display: none; }
+            .nav-fab::after { content: 'Asistente Digital'; display: inline-block; }
+
+            /* Hero - Layout en 2 columnas */
+            .hero {
+                padding-top: 120px; /* Compensa la navbar superior */
+                padding-bottom: 4rem;
+            }
+            
+            .hero header { display: none; } /* Ocultamos el header original (ya está en la navbar) */
+            
+            .hero-content-wrapper {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                align-items: center;
+                gap: 2rem;
+                width: 100%;
+                text-align: left;
+            }
+            
+            .hero .reveal { text-align: left; width: 100%; }
+            .hero h1 { width: 100%; font-size: clamp(3rem, 5vw, 5.5rem); }
+            .hero p { margin: 0 0 2.5rem 0; font-size: 1.15rem; max-width: 90%; }
+            .hero-actions { justify-content: flex-start; }
+            .hero-mockup-container { margin-top: 0; justify-content: flex-end; }
+            
+            /* Servicios - Layout Horizontal */
+            .services-wrapper {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+                max-width: 1200px;
+                padding: 3rem 0;
+            }
+            
+            .service-card {
+                position: relative; /* Removemos el sticky */
+                top: auto !important;
+                margin-bottom: 0;
+                height: 100%;
+            }
+
+            /* Proceso - Línea de tiempo horizontal */
+            .process-grid {
+                grid-template-columns: repeat(4, 1fr);
+                max-width: 100%;
+                gap: 2rem;
+            }
+            
+            .process-grid::before {
+                display: block;
+                left: 50px;
+                right: 50px;
+                top: 35px;
+                bottom: auto;
+                height: 2px;
+                width: calc(100% - 100px);
+                background: linear-gradient(to right, var(--accent-blue), var(--accent-purple));
+            }
+            
+            .process-step {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                background: rgba(20, 20, 26, 0.2);
+            }
+            
+            .process-step:hover {
+                transform: translateY(-10px);
+            }
+            
+            .step-indicator {
+                margin-bottom: 1rem;
+            }
+
+            /* Re-escalar Grillas para aprovechar el ancho */
+            .comparison-grid { max-width: 1100px; gap: 3rem; }
+            .tech-grid { max-width: 1000px; grid-template-columns: repeat(7, 1fr); }
+            .benefits-grid { max-width: 1100px; grid-template-columns: repeat(4, 1fr); }
+
+            /* Contacto - 2 Columnas */
+            .contact-wrapper {
+                display: grid;
+                grid-template-columns: 1fr 1.2fr;
+                gap: 5rem;
+                align-items: center;
+                max-width: 1100px;
+                width: 100%;
+            }
+            
+            .social-buttons { 
+                margin-bottom: 0; 
+                max-width: 100%;
+            }
+            
+            .custom-form {
+                max-width: 100%;
+            }
+            
+            /* Footer */
+            .footer { padding-bottom: 4rem; }
+        }
     </style>
 </head>
 <body>
@@ -806,30 +998,35 @@
         <span id="alertText">Mensaje enviado.</span>
     </div>
 
-    <!-- NAVEGACIÓN INFERIOR -->
+    <!-- NAVEGACIÓN (Se adapta a PC y Móvil automáticamente) -->
     <nav class="bottom-nav">
+        <!-- Logo exclusivo de Escritorio integrado a la Navbar -->
+        <div class="nav-desktop-logo css-logo">
+            <span class="n1">N</span><span class="n2">N</span> <span class="studio">Studio</span>
+        </div>
+        
         <a href="#inicio" class="nav-item active" data-section="inicio">
             <svg viewBox="0 0 24 24"><path d="M12 3l8 6v12h-5v-7h-6v7H4V9z"/></svg>
-            Inicio
+            <span>Inicio</span>
         </a>
         <a href="#servicios" class="nav-item" data-section="servicios">
             <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
-            Servicios
+            <span>Servicios</span>
         </a>
         <button class="nav-fab" onclick="toggleChat()" aria-label="Abrir Asistente">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/></svg>
         </button>
         <a href="#proceso" class="nav-item" data-section="proceso">
             <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 9h-2V7h-2v5H6v2h2v5h2v-5h2v-2z"/></svg>
-            Proceso
+            <span>Proceso</span>
         </a>
         <a href="#contacto" class="nav-item" data-section="contacto">
             <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-            Contacto
+            <span>Contacto</span>
         </a>
     </nav>
 
-    <!-- INICIO (HERO MEJORADO) -->
+    <!-- INICIO (HERO) -->
     <section id="inicio" class="hero container">
         <header>
             <div class="css-logo">
@@ -838,65 +1035,69 @@
         </header>
 
         <div class="hero-blob" id="heroBlob"></div>
-        <div class="reveal">
-            <span class="badge">Agencia Digital Premium</span>
-            <h1>Haz que tu <br><span>Negocio</span><br>Destaque.</h1>
-            <p>Creamos páginas web y catálogos digitales modernos para que tu negocio genere confianza, atraiga más clientes y esté disponible las 24 horas.</p>
-            
-            <div class="hero-actions">
-                <a href="#contacto" class="btn-main">Cotizar Proyecto</a>
-                <a href="#proceso" class="btn-sec">Cómo trabajamos</a>
+        
+        <!-- Wrapper añadido para gestionar el grid del hero en escritorio -->
+        <div class="hero-content-wrapper">
+            <div class="reveal">
+                <span class="badge">Agencia Digital Premium</span>
+                <h1>Haz que tu <br><span>Negocio</span><br>Destaque.</h1>
+                <p>Creamos páginas web y catálogos digitales modernos para que tu negocio genere confianza, atraiga más clientes y esté disponible las 24 horas.</p>
+                
+                <div class="hero-actions">
+                    <a href="#contacto" class="btn-main">Cotizar Proyecto</a>
+                    <a href="#proceso" class="btn-sec">Cómo trabajamos</a>
+                </div>
             </div>
-        </div>
 
-        <!-- MOCKUP MÓVIL INTACTO (APP REALISTA CSS) -->
-        <div class="hero-mockup-container reveal" id="phoneMockup">
-            <div class="phone-mockup">
-                <div class="phone-notch"></div>
-                <div class="app-screen">
-                    <div class="app-header">
-                        <div class="app-logo">NN <span>Studio</span></div>
-                        <div class="app-avatar">NN</div>
-                    </div>
-                    
-                    <div class="app-hero-card">
-                        <span class="app-badge">Premium</span>
-                        <h4>Ventas Totales</h4>
-                        <h2>$24,500.00</h2>
-                    </div>
-
-                    <div class="app-stats-row">
-                        <div class="app-stat">
-                            <div class="app-stat-icon">🚀</div>
-                            <span class="app-stat-val">+45.2%</span>
+            <!-- MOCKUP MÓVIL INTACTO (APP REALISTA CSS) -->
+            <div class="hero-mockup-container reveal" id="phoneMockup">
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="app-screen">
+                        <div class="app-header">
+                            <div class="app-logo">NN <span>Studio</span></div>
+                            <div class="app-avatar">NN</div>
                         </div>
-                        <div class="app-stat">
-                            <div class="app-stat-icon">👥</div>
-                            <span class="app-stat-val">1,240</span>
+                        
+                        <div class="app-hero-card">
+                            <span class="app-badge">Premium</span>
+                            <h4>Ventas Totales</h4>
+                            <h2>$24,500.00</h2>
                         </div>
-                    </div>
 
-                    <div class="app-list">
-                        <div class="app-item">
-                            <div class="app-item-icon"></div>
-                            <div class="app-item-lines">
-                                <div class="app-line w-100"></div>
-                                <div class="app-line w-60"></div>
+                        <div class="app-stats-row">
+                            <div class="app-stat">
+                                <div class="app-stat-icon">🚀</div>
+                                <span class="app-stat-val">+45.2%</span>
+                            </div>
+                            <div class="app-stat">
+                                <div class="app-stat-icon">👥</div>
+                                <span class="app-stat-val">1,240</span>
                             </div>
                         </div>
-                        <div class="app-item">
-                            <div class="app-item-icon"></div>
-                            <div class="app-item-lines">
-                                <div class="app-line w-80"></div>
-                                <div class="app-line w-100"></div>
+
+                        <div class="app-list">
+                            <div class="app-item">
+                                <div class="app-item-icon"></div>
+                                <div class="app-item-lines">
+                                    <div class="app-line w-100"></div>
+                                    <div class="app-line w-60"></div>
+                                </div>
+                            </div>
+                            <div class="app-item">
+                                <div class="app-item-icon"></div>
+                                <div class="app-item-lines">
+                                    <div class="app-line w-80"></div>
+                                    <div class="app-line w-100"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="app-bottom">
-                        <div class="app-btn-nav active"></div>
-                        <div class="app-btn-nav"></div>
-                        <div class="app-btn-nav"></div>
+                        <div class="app-bottom">
+                            <div class="app-btn-nav active"></div>
+                            <div class="app-btn-nav"></div>
+                            <div class="app-btn-nav"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1034,31 +1235,34 @@
     <section id="contacto" class="container contact-section reveal">
         <h2 class="section-title">Comencemos</h2>
         
-        <div class="social-buttons">
-            <a href="https://wa.me/526442252598?text=Hola,%20me%20interesa%20iniciar%20un%20proyecto" target="_blank" class="btn btn-wa">WhatsApp</a>
-            <a href="https://www.instagram.com/nnweb_studio" target="_blank" class="btn btn-ig">Instagram</a>
-            <a href="mailto:studionnweb@gmail.com" class="btn btn-email">studionnweb@gmail.com</a>
-        </div>
+        <!-- Wrapper añadido para organizar grilla en escritorio -->
+        <div class="contact-wrapper">
+            <div class="social-buttons">
+                <a href="https://wa.me/526442252598?text=Hola,%20me%20interesa%20iniciar%20un%20proyecto" target="_blank" class="btn btn-wa">WhatsApp</a>
+                <a href="https://www.instagram.com/nnweb_studio" target="_blank" class="btn btn-ig">Instagram</a>
+                <a href="mailto:studionnweb@gmail.com" class="btn btn-email">studionnweb@gmail.com</a>
+            </div>
 
-        <form class="custom-form" id="contactForm">
-            <div class="input-group">
-                <input type="text" id="nombre" name="nombre" placeholder=" " required>
-                <label>Tu Nombre</label>
-            </div>
-            <div class="input-group">
-                <input type="tel" id="telefono" name="telefono" placeholder=" " required>
-                <label>Teléfono</label>
-            </div>
-            <div class="input-group">
-                <input type="email" id="correo" name="correo" placeholder=" " required>
-                <label>Correo</label>
-            </div>
-            <div class="input-group">
-                <textarea id="mensaje" name="mensaje" placeholder=" " required></textarea>
-                <label>Detalles de tu proyecto...</label>
-            </div>
-            <button type="submit" class="btn-submit">Enviar Solicitud</button>
-        </form>
+            <form class="custom-form" id="contactForm">
+                <div class="input-group">
+                    <input type="text" id="nombre" name="nombre" placeholder=" " required>
+                    <label>Tu Nombre</label>
+                </div>
+                <div class="input-group">
+                    <input type="tel" id="telefono" name="telefono" placeholder=" " required>
+                    <label>Teléfono</label>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="correo" name="correo" placeholder=" " required>
+                    <label>Correo</label>
+                </div>
+                <div class="input-group">
+                    <textarea id="mensaje" name="mensaje" placeholder=" " required></textarea>
+                    <label>Detalles de tu proyecto...</label>
+                </div>
+                <button type="submit" class="btn-submit">Enviar Solicitud</button>
+            </form>
+        </div>
     </section>
 
     <!-- FOOTER -->
@@ -1112,7 +1316,7 @@
         </div>
     </div>
 
-    <!20SCRIPTS -->
+    <!-- SCRIPTS -->
     <script>
         // 1. PRELOADER EXACTAMENTE 2 SEGUNDOS
         window.addEventListener('load', () => {
